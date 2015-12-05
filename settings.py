@@ -8,7 +8,10 @@ import os.path
 TEMPLATE_PATH = os.path.join(os.path.dirname(__file__), 'templates')
 STATIC_PATH = os.path.join(os.path.dirname(__file__), 'assets')
 
+PORT = 6338
+
 settings = {
+    'port': PORT,
     'autoreload': True,
     'debug': True,
     'compress_response': True,
