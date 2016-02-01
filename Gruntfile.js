@@ -7,6 +7,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'assets/css/style.css': 'assets/less/style.less',
+                    'assets/css/index.css': 'assets/less/index.less',
                 }
             }
         },

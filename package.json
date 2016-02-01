@@ -1,21 +1,22 @@
 {
-  "name": "woniu",
+  "name": "maiya",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lncwwn/woniu.git"
+    "url": "git+https://github.com/lncwwn/maiya.git"
   },
   "author": "victor li",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/lncwwn/woniu/issues"
+    "url": "https://github.com/lncwwn/maiya/issues"
   },
-  "homepage": "https://github.com/lncwwn/woniu#readme",
+  "homepage": "https://github.com/lncwwn/maiya#readme",
   "dependencies": {
     "babel-core": "^5.8.34",
     "babel-loader": "^5.4.0",
@@ -38,6 +39,7 @@
     "imports-loader": "^0.6.4",
     "jquery": "^2.1.4",
     "json-loader": "^0.5.3",
+    "koa": "^1.1.2",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "style-loader": "^0.12.4",
