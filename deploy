@@ -1,6 +1,5 @@
 #!/bin/bash
 
 grunt less
-#grunt watch&webpack --watch&python app.py
-grunt watch&python app.py
+grunt watch&npm start
 
