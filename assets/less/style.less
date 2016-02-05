@@ -2,10 +2,119 @@ html,
 body {
     margin: 0;
     padding: 0;
+    position: relative;
+    background-color: #f4f7f8;
+}
+
+body {
+    padding-top: 60px;
+}
+
+a {
+    color: #fff;
+    transition: all .3s;
+}
+
+a:hover {
+    color: #66ffff;
+    text-decoration: none;
+}
+
+.ul-inline {
+    margin: 0;
+    li {
+        float: left;
+        padding-right: 8px;
+    }
+    li:last-child {
+        padding: 0;
+    }
 }
 
 .art-header {
     width: 100%;
     height: 45px;
-    background-color: green;
+    background-color: #0099cc;
+    position: fixed;
+    top: 0;
+    color: #fff;
+    line-height: 45px;
+    box-shadow: 0 0 3px #063E50;
+    .header-main {
+        width: 1000px;
+        margin: 0 auto;
+        .brand {
+            float: left;
+            font-size: 15px;
+        }
+    }
+}
+
+.art-main {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.main {
+    width: 98%;
+    height: 100px;
+    border: 1px solid #e0e0e0;
+    border-radius: 3px;
+    background-color: #fff;
+    box-shadow: 0 0 3px #eee;
+    .art-nav {
+        width: 100%;
+        font-size: 13px;
+        border-bottom: 1px solid #e0e0e0;
+        box-shadow: 0 0 3px #eee;
+        ul {
+            padding: 10px 6px 8px;
+            .nav {
+                margin-left: 6px;
+                padding: 1px 5px;
+                border: 1px solid #2683B1;
+                border-radius: 3px;
+                background-color: #3399cc;
+                transition: background-color .3s;
+            }
+            .nav:hover {
+                background-color: #333;
+            }
+        }
+    }
+}
+
+.right-side {
+    min-height: 100px;
+    margin-bottom: 6px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 3px #eee;
+    background-color: #fff;
+}
+
+.right-side:last-child {
+    margin-bottom: 0;
+}
+
+.art-category {
+    width: 960px;
+    height: 30px;
+    margin: 10px auto;
+    border: 1px solid #fafafa;
+}
+
+.footer {
+    width: 100%;
+    margin-top: 50px;
+    border-top: 1px solid #e0e0e0;
+    ul {
+        width: 1000px;
+        margin: 0 auto;
+        padding-top: 3px;
+        font-size: 12px;
+        text-align: center;
+        a {
+            color: #3399cc;
+        }
+    }
 }
