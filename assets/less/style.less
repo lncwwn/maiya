@@ -11,13 +11,16 @@ body {
 }
 
 a {
-    color: #fff;
     transition: all .3s;
 }
 
 a:hover {
-    color: #66ffff;
+    color: #228DE8;
     text-decoration: none;
+}
+
+.link-white {
+    color: #fff;
 }
 
 .ul-inline {
@@ -45,7 +48,7 @@ a:hover {
         margin: 0 auto;
         .brand {
             float: left;
-            font-size: 15px;
+            font-size: 20px;
         }
     }
 }
@@ -57,7 +60,7 @@ a:hover {
 
 .main {
     width: 98%;
-    height: 100px;
+    min-height: 100px;
     border: 1px solid #e0e0e0;
     border-radius: 3px;
     background-color: #fff;
@@ -81,6 +84,51 @@ a:hover {
                 background-color: #333;
             }
         }
+    }
+}
+.art-content {
+    .art-post {
+        height: 50px;
+        padding: 0 10px;
+        border-bottom: 1px solid #e0e0e0;
+        .art-author-avatar {
+            width: 30px;
+            height: 30px;
+            margin-top: 10px;
+            cursor: pointer;
+            background: url(/assets/img/avatar.svg) no-repeat;
+            background-size: contain;
+            border: 1px solid #e0e0e0;
+            border-radius: 3px;
+            transition: all .3s;
+        }
+        .art-author-avatar:hover {
+            box-shadow: 0 0 3px #e0e0e0;
+        }
+        .art-post-title {
+            max-width: 60%;
+            height: 100%;
+            padding: 0 6px;
+            line-height: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            .title {
+                color: #555;
+                font-weight: bold;
+            }
+            .title:visited {
+                font-weight: normal;
+            }
+        }
+        .art-post-date {
+            height: 100%;
+            padding: 0 3px;
+            line-height: 50px;
+        }
+    }
+    .art-post:last-child {
+        border-bottom: 0;
     }
 }
 

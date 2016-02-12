@@ -2,4 +2,33 @@ extends ./layout.jade
 block title
     title="麦芽"
 block body
-    div dfdfdfdfdfdfdfdf
+    .uk-grid.uk-grid-collapse.posts-layout
+        .uk-width-3-4
+            .main
+                .art-nav
+                    ul.uk-list.ul-inline.uk-clearfix
+                        li.nav
+                            a.link-white(href="/") 讨论区
+                        li.nav
+                            a.link-white(href="/") 根雕
+                        li.nav
+                            a.link-white(href="/") 木雕
+                        li.nav
+                            a.link-white(href="/") 盆景
+                        li.nav
+                            a.link-white(href="/") 原料
+                        li.nav
+                            a.link-white(href="/") 其他
+                .art-content
+                    each post in posts
+                        .art-post.uk-clearfix
+                            .art-author-avatar.uk-float-left
+                            .art-post-title.uk-float-left
+                                a.title(href="/posts/" + encodeURIComponent(post.title))= post.title
+                            .art-post-date.uk-float-right
+                                span= post.lastModified
+        .uk-width-1-4
+            .right-side
+            .right-side
+            .right-side
+            .right-side
