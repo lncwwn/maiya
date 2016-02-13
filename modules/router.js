@@ -38,9 +38,11 @@ router.get('/', function *() {
  */
 router.get('/posts/:title', function *() {
 
-    const url = API_SETTING('get_post_by_title').replace('{title}', this.params.title);
+    let url = API_SETTING('get_post_by_title').replace('{title}', this.params.title);
+    url = encodeURI(url);
     this.body = yield request.getAsync(url).then(res => {
-        const body = JSON.parse(res.body);
+        let body = JSON.parse(res.body);
+        body.lastModified = moment(body.lastModified).format('YYYY年MM月DD日 hh:mm:ss');
         return render('post', { post: body });
     }).catch(e => {
         console.log(e);
@@ -51,8 +53,34 @@ router.get('/posts/:title', function *() {
 /**
  * 用户登录页面
  */
-router.get('/users/login', function *() {
+/*router.get('/users/login', function *() {
     this.body = yield render('login');
+});
+*/
+
+router.post('/users/login', function *() {
+
+    const url = API_SETTING('user_login');
+    const nick = this.request.body.nick;
+    const password = this.request.password;
+
+    if (!nick || !password || password.length < 6 || password.length > 30) {
+        this.body = {succ: false};
+    }
+
+    this.body = yield request.postAsync(url, {
+        form: {
+            nick: nick,
+            password: password
+        }
+    }).then(res => {
+        return res.body;
+    });
+
+});
+
+router.get('/posts/edit', function *() {
+    this.body = yield render('edit');
 });
 
 module.exports = router;

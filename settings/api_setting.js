@@ -16,7 +16,8 @@ const PORT = 30000;
 const setting = {
     list_posts: "/posts",
     get_post_by_id: "/posts/id/{id}",
-    get_post_by_title: "/posts/title/{title}"
+    get_post_by_title: "/posts/title/{title}",
+    user_login: "/users/login"
 };
 
 function apiPath(pathPart) {

@@ -8,10 +8,13 @@ block body
                 .art-post-body
                     .post-title.uk-clearfix
                         .post-author.uk-float-left
-                        a.uk-float-left(href="/posts/title/" + post.title)
+                        a.uk-float-left(href="javascript:;")
                             h3= post.title
                     .post-content
                         div= post.content
+                    .post-footer
+                        span= "发布于"
+                        strong= post.lastModified
         .uk-width-1-4
             .right-side
             .right-side

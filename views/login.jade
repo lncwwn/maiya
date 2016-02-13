@@ -1,3 +1,26 @@
 extends ./layout.jade
+block css
+    link(rel="stylesheet" href="/assets/dist/css/login.css")
 block title
     title="麦芽|用户登录"
+block body
+    .uk-grid.uk-grid-collapse
+        .uk-width-1-1
+            .art-login
+                form.uk-form.uk-form-controls-condensed
+                    fieldset
+                        legend
+                            h3= "用户登录"
+                        .art-form-body
+                            .uk-form-row
+                                .uk-form-icon
+                                    i.uk-icon-user
+                                    input.uk-form-width-large(type="text" placeholder="请输入用户名")
+                            .uk-form-row
+                                .uk-form-icon
+                                    i.uk-icon-lock
+                                    input.uk-form-width-large(type="password" placeholder="请输入密码")
+                            .uk-form-row
+                                .uk-form-controls.uk-form-controls-text#remember-login
+                                    input(type="checkbox")
+                                    label(for="remember-login") 30天内免登录

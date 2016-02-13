@@ -10,7 +10,7 @@ block body
                         li.nav
                             a.link-white(href="/") 讨论区
                         li.nav
-                            a.link-white(href="/") 根雕
+                            a.link-white(href="/") 预定
                         li.nav
                             a.link-white(href="/") 木雕
                         li.nav
@@ -24,7 +24,7 @@ block body
                         .art-post.uk-clearfix
                             .art-author-avatar.uk-float-left
                             .art-post-title.uk-float-left
-                                a.title(href="/posts/" + encodeURIComponent(post.title))= post.title
+                                a.title(href=encodeURI("/posts/" + post.title))= post.title
                             .art-post-date.uk-float-right
                                 span= post.lastModified
         .uk-width-1-4

@@ -10,8 +10,12 @@ const router = require('./modules/router');
 const APP_SETTING = require('./settings/app_setting.json');
 
 const staticServe = require('koa-static-server');
+const bodyParser = require('koa-body-parser');
 const app = require('koa')();
 
+// request body parser
+app.use(bodyParser());
+// router
 app.use(router.routes());
 app.use(router.allowedMethods());
 

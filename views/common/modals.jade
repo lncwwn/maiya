@@ -1,0 +1,50 @@
+// 登录窗口
+#login-modal.uk-modal
+    .uk-modal-dialog
+        a.uk-modal-close.uk-close
+        .uk-modal-header
+            p= "用户登录"
+        form.uk-form.uk-form-controls.uk-form-controls-text#login-form
+            .uk-grid
+                .uk-form-icon.uk-width-medium-1-1.uk-container-center.uk-form-controls-condensed
+                    i.uk-icon-user
+                    input.uk-width-1-1(type="text" name="nick" placeholder="请输入用户名")
+                .uk-form-icon.uk-width-1-1.uk-container-center.uk-form-controls-condensed
+                    i.uk-icon-lock
+                    input.uk-width-1-1(type="password" name="password" placeholder="请输入密码")
+                .uk-width-1-1.uk-container-center.uk-form-controls-condensed
+                    label
+                        input(type="checkbox" checked="checked")
+                        span= " 记住我的登录状态"
+        .uk-modal-footer
+            .uk-grid
+                .uk-width-1-2.uk-text-left
+                    span= "还没有帐号?"
+                    a(href="javascript:;" data-uk-modal="{target: '#register-modal'}")= "注册账户"
+                .uk-width-1-2.uk-text-right
+                    button.uk-button.uk-button-primary(type="button")#login-button= "登录"
+
+// 注册窗口
+#register-modal.uk-modal
+    .uk-modal-dialog
+        a.uk-modal-close.uk-close
+        .uk-modal-header
+            p= "注册帐号"
+        form.uk-form.uk-form-controls.uk-form-controls-text#register-form
+            .uk-grid
+                .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
+                    i.uk-icon-user
+                    input.uk-width-1-1(type="text" placeholder="请输入用户名")
+                .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
+                    i.uk-icon-lock
+                    input.uk-width-1-1(type="password" placeholder="请输入密码")
+                .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
+                    i.uk-icon-lock
+                    input.uk-width-1-1(type="password" placeholder="请再次输入密码")
+        .uk-modal-footer
+            .uk-grid
+                .uk-width-1-2.uk-text-left
+                    span= "已有帐号?"
+                    a(href="javascript:;" data-uk-modal="{target: '#login-modal'}")= "立即登录"
+                .uk-width-1-2.uk-text-right
+                    button.uk-button.uk-button-primary(type="button")#cancel-button= "立即注册"
