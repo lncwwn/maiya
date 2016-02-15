@@ -17,16 +17,6 @@ const app = require('./koa');
 app.name = 'maiya';
 app.keys = ['test01', 'test02', 'test03'];
 
-const Jade = require('koa-jade');
-const jade = new Jade({
-    viewPath: './views',
-    debug: true,
-    pretty: true,
-    compileDebug: true,
-    locals: {name: '麦芽'},
-    basedir: './views'
-});
-
 jade.use(app);
 
 // request body parser
