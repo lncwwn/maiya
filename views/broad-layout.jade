@@ -1,0 +1,25 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width")
+        link(type="text/css" rel="stylesheet" href="/bower_components/uikit/css/uikit.min.css")
+        link(type="text/css" rel="stylesheet" href="/bower_components/uikit/css/uikit.gradient.min.css")
+        link(type="text/css" rel="stylesheet" href="/bower_components/uikit/css/uikit.almost-flat.min.css")
+        link(type="text/css" rel="stylesheet" href="/assets/dist/css/style.css")
+        block css
+        block title
+            title="麦芽"
+    body
+        .uk-grid
+            .uk-width-1-1
+                include ./common/header.jade
+                .art-broad-main
+                    block body
+                include ./common/modals.jade
+                include ./common/footer.jade
+    script(src="/bower_components/jquery/dist/jquery.min.js" type="text/javascript")
+    script(src="/bower_components/uikit/js/uikit.min.js" type="text/javascript")
+    script(src="/assets/dist/js/dep.js" type="text/javascript")
+    script(src="/assets/dist/js/app.js" type="text/javascript")
+    block js-load

@@ -11,18 +11,50 @@ const APP_SETTING = require('./settings/app_setting.json');
 
 const staticServe = require('koa-static-server');
 const bodyParser = require('koa-body-parser');
-const app = require('koa')();
+const session = require('koa-session');
+const app = require('./koa');
+
+app.name = 'maiya';
+app.keys = ['test01', 'test02', 'test03'];
+
+const Jade = require('koa-jade');
+const jade = new Jade({
+    viewPath: './views',
+    debug: true,
+    pretty: true,
+    compileDebug: true,
+    locals: {name: '麦芽'},
+    basedir: './views'
+});
+
+jade.use(app);
 
 // request body parser
 app.use(bodyParser());
+
 // router
 app.use(router.routes());
 app.use(router.allowedMethods());
+app.use(session(app));
+
+// set session
+app.use(function *(next) {
+    const loginUserCookie = this.cookies.get('login_user');
+    if (loginUserCookie) {
+        const cookieValues = loginUserCookie.split('&');
+        this.session.currentUser = {
+            id: cookieValues[0],
+            nick: cookieValues[1]
+        };
+    }
+    yield next;
+});
 
 app.use(staticServe({rootDir: __dirname + '/assets', rootPath: '/assets'}));
 app.use(staticServe({rootDir: __dirname + '/bower_components', rootPath: '/bower_components'}));
 
 app.on('error', error => {
+    console.log(error);
     log.error('500', error);
 });
 

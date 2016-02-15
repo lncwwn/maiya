@@ -25,8 +25,11 @@ block body
                             .art-author-avatar.uk-float-left
                             .art-post-title.uk-float-left
                                 a.title(href=encodeURI("/posts/" + post.title))= post.title
+                                .post-date
+                                    i.uk-icon-clock-o
+                                    span= " " + post.lastModified
                             .art-post-date.uk-float-right
-                                span= post.lastModified
+                                //span= post.lastModified
         .uk-width-1-4
             .right-side
             .right-side

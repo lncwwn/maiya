@@ -7,10 +7,12 @@
 
 'use strict';
 
+const app = require('../koa');
 const router = require('koa-router')();
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 const moment = require('moment');
+const md5 = require('md5');
 const render = require('./render');
 // api setting
 const API_SETTING = require('../settings/api_setting');
@@ -58,28 +60,49 @@ router.get('/posts/:title', function *() {
 });
 */
 
+/**
+ * 用户登录api
+ * method: POST
+ * @param nick  用户昵称
+ * @param password 用户密码
+ */
 router.post('/users/login', function *() {
 
     const url = API_SETTING('user_login');
     const nick = this.request.body.nick;
-    const password = this.request.password;
+    const password = this.request.body.password;
 
     if (!nick || !password || password.length < 6 || password.length > 30) {
         this.body = {succ: false};
     }
 
-    this.body = yield request.postAsync(url, {
+    this.body = yield request.postAsync({
+        url: url,
         form: {
             nick: nick,
-            password: password
+            password: md5(password)
         }
     }).then(res => {
-        return res.body;
+        const user = JSON.parse(res.body);
+        // 设置登录cookie
+        if (user && user.nick) {
+            this.cookies.set('login_user', `${user.id}&${user.nick}`, {
+                httpOnly: true,
+                // cookie有效期30天
+                expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
+                signed: true
+            });
+        }
+        return user;
     });
 
 });
 
+/**
+ * 文章编辑页面
+ */
 router.get('/posts/edit', function *() {
+    console.log(app.state);
     this.body = yield render('edit');
 });
 

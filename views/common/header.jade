@@ -1,9 +1,11 @@
 .art-header
     .header-main.uk-clearfix
         .brand
-            a.link-white(href="/") 麦芽
+            a.link-white(href="/" title="麦芽")= "麦芽"
+                //img.logo(src="/assets/img/maiya.png")
         ul.uk-float-right.uk-list.ul-inline
             li
                 a.link-white(href="javascript:;" data-uk-modal="{target: '#login-modal'}") 登录
+                //a.link-white(href="javascript:;" data-uk-modal="{target: '#login-modal'}")= currentUser
             li
                 a.link-white(href="/") 投稿

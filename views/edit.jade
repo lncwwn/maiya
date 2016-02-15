@@ -1,4 +1,4 @@
-extends ./layout.jade
+extends ./broad-layout.jade
 block css
     link(rel="stylesheet" href="/bower_components/codemirror/lib/codemirror.css")
     link(rel="stylesheet" href="/bower_components/uikit/css/components/htmleditor.min.css")
@@ -11,7 +11,7 @@ block body
             .uk-width-1-1.uk-form-controls-condensed
                 input.uk-width-1-1(type="text" placeholder="请输入文章标题")
             .uk-width-1-1.uk-form-controls-condensed
-                textarea(data-uk-htmleditor="{markdown:true, mode:'tab', lblPreview:'预览'}")
+                textarea(data-uk-htmleditor="{markdown:true, mode:'split', lblPreview:'预览'}")
             .uk-width-1-1.uk-form-controls-condensed
                 .uk-text-left
                     button.uk-button.uk-button-primary= "发表文章"
