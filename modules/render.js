@@ -1,9 +1,11 @@
 /**
- * co-views
+ * render provided by co-views
  *
  * @author victor li
  * @date 2016/02/01
  */
+
+'use strict';
 
 const views = require('co-views');
 

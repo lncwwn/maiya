@@ -12,6 +12,8 @@
                 .uk-form-icon.uk-width-1-1.uk-container-center.uk-form-controls-condensed
                     i.uk-icon-lock
                     input.uk-width-1-1(type="password" name="password" placeholder="请输入密码")
+                .uk-width-medium-1-1.uk-container-center.uk-form-controls-condensed
+                    button.uk-button.uk-button-primary.uk-width-1-1(type="button")#login-button 登录
                 .uk-width-1-1.uk-container-center.uk-form-controls-condensed
                     label
                         input(type="checkbox" checked="checked")
@@ -21,8 +23,8 @@
                 .uk-width-1-2.uk-text-left
                     span= "还没有帐号?"
                     a(href="javascript:;" data-uk-modal="{target: '#register-modal'}")= "注册账户"
-                .uk-width-1-2.uk-text-right
-                    button.uk-button.uk-button-primary(type="button")#login-button= "登录"
+                //.uk-width-1-2.uk-text-right
+                //    button.uk-button.uk-button-primary(type="button")#login-button= "登录"
 
 // 注册窗口
 #register-modal.uk-modal
@@ -41,10 +43,12 @@
                 .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
                     i.uk-icon-lock
                     input.uk-width-1-1(type="password" placeholder="请再次输入密码")
+                .uk-width-medium-1-1.uk-container-center.uk-form-controls-condensed
+                    button.uk-button.uk-button-primary.uk-width-1-1(type="button")#login-button 注册账户
         .uk-modal-footer
             .uk-grid
                 .uk-width-1-2.uk-text-left
                     span= "已有帐号?"
                     a(href="javascript:;" data-uk-modal="{target: '#login-modal'}")= "立即登录"
-                .uk-width-1-2.uk-text-right
-                    button.uk-button.uk-button-primary(type="button")#cancel-button= "立即注册"
+                //.uk-width-1-2.uk-text-right
+                //    button.uk-button.uk-button-primary(type="button")#cancel-button= "立即注册"

@@ -5,6 +5,8 @@
  * @date 2016/02/01
  */
 
+'use strict';
+
 const render = require('./modules/render');
 const APP_SETTING = require('./settings/app_setting.json');
 
@@ -28,10 +30,24 @@ const userApiRouter = require('./routes/api/userRouter');
 const postApiRouter = require('./routes/api/postRouter');
 
 app.name = 'maiya';
+// for sign cookie
 app.keys = ['test01', 'test02', 'test03'];
 
 // request body parser
 app.use(bodyParser());
+
+app.use(session({
+    key: 'user_session'
+}, app));
+
+app.use(function *(next) {
+    this.render = function(viewName, data) {
+        data = data || {};
+        data.user = this.session.user;
+        return render(viewName, data);
+    };
+    yield next;
+});
 
 // router
 app.use(ApiRouter.routes())
@@ -43,26 +59,6 @@ userRouter(CommonRouter);
 postRouter(CommonRouter);
 userApiRouter(ApiRouter);
 postApiRouter(ApiRouter);
-
-app.use(session(app));
-
-// set session
-app.use(function *(next) {
-    const loginUserCookie = this.cookies.get('login_user');
-    if (loginUserCookie) {
-        const cookieValues = loginUserCookie.split('&');
-        this.session.currentUser = {
-            id: cookieValues[0],
-            nick: cookieValues[1]
-        };
-    }
-    yield next;
-});
-
-app.use(function *(next) {
-    this.state.hello = {'dsdsds': 'dsdsdsdsds'};
-    yield next;
-});
 
 app.use(staticServe({rootDir: __dirname + '/assets', rootPath: '/assets'}));
 app.use(staticServe({rootDir: __dirname + '/bower_components', rootPath: '/bower_components'}));

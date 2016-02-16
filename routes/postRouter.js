@@ -11,7 +11,6 @@ const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 const moment = require('moment');
 const md5 = require('md5');
-const render = require('../modules/render');
 // api setting
 const API_SETTING = require('../settings/api_setting');
 
@@ -26,7 +25,8 @@ module.exports = function(router) {
             for (let post of posts) {
                 post.lastModified = moment(post.lastModified).format('YYYY年MM月DD日 hh:mm:ss');
             }
-            return render('list', { posts: posts });
+
+            return this.render('list', { posts: posts });
         }).catch(e => {
             console.log(e);
         });
@@ -41,7 +41,7 @@ module.exports = function(router) {
         this.body = yield request.getAsync(url).then(res => {
             let body = JSON.parse(res.body);
             body.lastModified = moment(body.lastModified).format('YYYY年MM月DD日 hh:mm:ss');
-            return render('post', { post: body });
+            return this.render('post', { post: body });
         }).catch(e => {
             console.log(e);
         });
@@ -50,8 +50,7 @@ module.exports = function(router) {
 
     // 文章编辑页面
     router.get('/posts/edit', function *() {
-        console.log(this.state);
-        this.body = yield render('edit');
+        this.body = yield this.render('edit');
     });
 
 };

@@ -11,7 +11,6 @@ const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 const moment = require('moment');
 const md5 = require('md5');
-const render = require('../../modules/render');
 // api setting
 const API_SETTING = require('../../settings/api_setting');
 
@@ -43,12 +42,16 @@ module.exports = function(router) {
             const user = JSON.parse(res.body);
             // 设置登录cookie
             if (user && user.nick) {
-                this.cookies.set('login_user', `${user.id}&${user.nick}`, {
-                    httpOnly: true,
+                //this.cookies.set('user_session', `${user.nick}`, {
+                    //httpOnly: true,
                     // cookie有效期30天
-                    expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
-                    signed: true
-                });
+                    //expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
+                    //signed: true
+                //});
+                this.session.user = {
+                    id: user.id,
+                    nick: user.nick
+                };
             }
             return user;
         });
