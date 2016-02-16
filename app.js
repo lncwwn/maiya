@@ -17,8 +17,6 @@ const app = require('./koa');
 app.name = 'maiya';
 app.keys = ['test01', 'test02', 'test03'];
 
-jade.use(app);
-
 // request body parser
 app.use(bodyParser());
 
