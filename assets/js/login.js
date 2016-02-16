@@ -9,7 +9,7 @@
 
 module.exports = {
     login: function(nick, password, code) {
-        const url = '/users/login';
+        const url = '/api/users/login';
         $.post(url, {nick: nick, password: password}, function(data) {
             console.log(data);
         });
