@@ -17,7 +17,8 @@ const setting = {
     list_posts: "/posts",
     get_post_by_id: "/posts/id/{id}",
     get_post_by_title: "/posts/title/{title}",
-    user_login: "/users/login"
+    user_login: "/users/login",
+    user_register: "/users/register"
 };
 
 function apiPath(pathPart) {

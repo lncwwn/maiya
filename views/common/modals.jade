@@ -36,15 +36,18 @@
             .uk-grid
                 .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
                     i.uk-icon-user
-                    input.uk-width-1-1(type="text" placeholder="请输入用户名")
+                    input.uk-width-1-1(type="text" name="nick" placeholder="请输入用户名")
+                .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
+                    i.uk-icon-envelope
+                    input.uk-width-1-1(type="text" name="email" placeholder="请输入邮箱地址")
                 .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
                     i.uk-icon-lock
-                    input.uk-width-1-1(type="password" placeholder="请输入密码")
+                    input.uk-width-1-1(type="password" name="password1" placeholder="请输入密码")
                 .uk-form-icon.uk-width-1-1.uk-form-controls-condensed
                     i.uk-icon-lock
-                    input.uk-width-1-1(type="password" placeholder="请再次输入密码")
+                    input.uk-width-1-1(type="password" name="password2" placeholder="请再次输入密码")
                 .uk-width-medium-1-1.uk-container-center.uk-form-controls-condensed
-                    button.uk-button.uk-button-primary.uk-width-1-1(type="button")#login-button 注册账户
+                    button.uk-button.uk-button-primary.uk-width-1-1(type="button")#register-button 注册账户
         .uk-modal-footer
             .uk-grid
                 .uk-width-1-2.uk-text-left

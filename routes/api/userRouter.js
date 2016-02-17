@@ -48,6 +48,7 @@ module.exports = function(router) {
                     //expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
                     //signed: true
                 //});
+                // set login session
                 this.session.user = {
                     id: user.id,
                     nick: user.nick
@@ -56,6 +57,37 @@ module.exports = function(router) {
             return user;
         });
 
+    });
+
+    /**
+     * 用户注册api
+     * method: POST
+     * @param nick 用户昵称
+     * @param password1 用户密码
+     * @param password2 用户再次确认的密码
+     */
+    router.post('/users/register', function *() {
+
+        const url = API_SETTING('user_register');
+        const nick = this.request.body.nick;
+        const password1 = this.request.body.password1;
+        const password2 = this.request.body.password2;
+        if (!nick || !password1 || password1.length < 6 || password1.length > 18 || password1 !== password2) {
+            return {
+                succ: false,
+                msg: '注册参数不合法'
+            };
+        }
+        this.body = yield request.postAsync({
+            url: url,
+            form: {
+                nick: nick,
+                password1: password1,
+                password2: password2
+            }
+        }).then(res => {
+            return res.body;
+        });
     });
 
 };
