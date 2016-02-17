@@ -9,6 +9,7 @@
 
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
+const Boom = require('boom');
 const moment = require('moment');
 const md5 = require('md5');
 // api setting
@@ -29,7 +30,7 @@ module.exports = function(router) {
         const password = this.request.body.password;
 
         if (!nick || !password || password.length < 6 || password.length > 30) {
-            this.body = {succ: false};
+            this.body = Boom.badRequest('invalid nick or password');
         }
 
         this.body = yield request.postAsync({
@@ -72,11 +73,11 @@ module.exports = function(router) {
         const nick = this.request.body.nick;
         const password1 = this.request.body.password1;
         const password2 = this.request.body.password2;
+        const email = this.request.body.email;
+
         if (!nick || !password1 || password1.length < 6 || password1.length > 18 || password1 !== password2) {
-            return {
-                succ: false,
-                msg: '注册参数不合法'
-            };
+            this.body = Boom.badRequest('invalid nick or password');
+            return;
         }
         this.body = yield request.postAsync({
             url: url,

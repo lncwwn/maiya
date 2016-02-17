@@ -16,9 +16,13 @@ module.exports = {
         });
     },
     // 用户注册
-    register: function(nick, password1, password2) {
+    register: function(nick, password1, password2, email) {
         const url = '/api/users/register';
-        $.post(url, {nick: nick, password1: password1, password2: password2}, function(data) {
+        $.post(url, {
+            nick: nick,
+            password1: password1,
+            password2: password2,
+            email: email}, function(data) {
             console.log(data);
         });
     }
