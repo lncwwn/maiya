@@ -7,23 +7,21 @@
 
 'use strict';
 
-module.exports = {
-    // 用户登录
-    login: function(nick, password, code) {
-        const url = '/api/users/login';
-        $.post(url, {nick: nick, password: password}, function(data) {
-            console.log(data);
-        });
-    },
-    // 用户注册
-    register: function(nick, password1, password2, email) {
-        const url = '/api/users/register';
-        $.post(url, {
-            nick: nick,
-            password1: password1,
-            password2: password2,
-            email: email}, function(data) {
-            console.log(data);
-        });
-    }
+const util = require('./util');
+
+// 用户登录
+module.exports.login = function(nick, password, code) {
+    const url = '/api/users/login';
+    return util.ajax('POST', url, {nick: nick, password: password});
+};
+
+// 用户注册
+module.exports.register = function(nick, password1, password2, email) {
+    const url = '/api/users/register';
+    return util.ajax('POST', url, {
+        nick: nick,
+        password1: password1,
+        password2: password2,
+        email: email
+    });
 };

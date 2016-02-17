@@ -26,6 +26,9 @@ module.exports = function(router) {
     router.post('/users/login', function *() {
 
         const url = API_SETTING('user_login');
+        // page will redirect to
+        //const referer = this.request.header.referer;
+
         const nick = this.request.body.nick;
         const password = this.request.body.password;
 
