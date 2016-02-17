@@ -86,8 +86,8 @@ module.exports = function(router) {
             url: url,
             form: {
                 nick: nick,
-                password1: password1,
-                password2: password2
+                email: email,
+                password: md5(password1),
             }
         }).then(res => {
             return res.body;

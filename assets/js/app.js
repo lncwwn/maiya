@@ -57,6 +57,7 @@ $('body')
     $(this).hide();
     $(this).next().removeClass('uk-hidden');
     User.register(nick, password1, password2, email).then(function(data) {
+        console.log(data);
         // 注册成功
         if (data && data.nick) {
             UIkit.notify({
