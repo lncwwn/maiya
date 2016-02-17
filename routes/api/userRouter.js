@@ -18,6 +18,22 @@ const API_SETTING = require('../../settings/api_setting');
 module.exports = function(router) {
 
     /**
+     * 获取用户信息api
+     * method: GET
+     * @param nick  用户昵称
+     */
+    router.get('/users/nick/:nick', function *() {
+
+        let url = API_SETTING('get_user_by_nick');
+        const nick = this.params.nick;
+        url = url.replace('{nick}', nick);
+        this.body = yield request.getAsync(url).then(res => {
+            return res.body;
+        });
+
+    });
+
+    /**
      * 用户登录api
      * method: POST
      * @param nick  用户昵称

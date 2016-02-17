@@ -14,11 +14,15 @@ const HOST = 'localhost';
 const PORT = 30000;
 
 const setting = {
+    // posts
     list_posts: "/posts",
     get_post_by_id: "/posts/id/{id}",
     get_post_by_title: "/posts/title/{title}",
+    // users
     user_login: "/users/login",
-    user_register: "/users/register"
+    user_register: "/users/register",
+    get_user_by_id: "/users/id/{id}",
+    get_user_by_nick: "/users/nick/{nick}"
 };
 
 function apiPath(pathPart) {
