@@ -8,8 +8,8 @@
 'use strict';
 
 window.jQuery = window.$ = require('jquery');
-require('./modals');
-const User = require('./login');
+const modal = require('./modal');
+const User = require('./user');
 
 let timer1 = null;
 let timer2 = null;
@@ -218,3 +218,5 @@ $('body')
         }
     });
 });
+
+modal.events();

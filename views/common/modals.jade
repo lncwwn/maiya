@@ -29,7 +29,7 @@
             .uk-grid
                 .uk-width-1-2.uk-text-left
                     span= "还没有帐号?"
-                    a(href="javascript:;" data-uk-modal="{target: '#register-modal'}")= "注册账户"
+                    a(href="javascript:;" data-uk-modal="{target: '#register-modal',bgclose: false}")= "注册账户"
                 //.uk-width-1-2.uk-text-right
                 //    button.uk-button.uk-button-primary(type="button")#login-button= "登录"
 
@@ -70,6 +70,6 @@
             .uk-grid
                 .uk-width-1-2.uk-text-left
                     span= "已有帐号?"
-                    a(href="javascript:;" data-uk-modal="{target: '#login-modal'}")= "立即登录"
+                    a(href="javascript:;" data-uk-modal="{target: '#login-modal',bgclose: false}")= "立即登录"
                 //.uk-width-1-2.uk-text-right
                 //    button.uk-button.uk-button-primary(type="button")#cancel-button= "立即注册"

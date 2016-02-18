@@ -11,6 +11,7 @@ const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 const moment = require('moment');
 const md5 = require('md5');
+const util = require('../modules/util');
 // api setting
 const API_SETTING = require('../settings/api_setting');
 
@@ -23,7 +24,8 @@ module.exports = function(router) {
             const body = JSON.parse(res.body);
             const posts = body.rows;
             for (let post of posts) {
-                post.lastModified = moment(post.lastModified).format('YYYY年MM月DD日 hh:mm:ss');
+                //post.lastModified = moment(post.lastModified).format('YYYY年MM月DD日 hh:mm:ss');
+                post.lastModified = util.normalDate(post.lastModified);
             }
 
             return this.render('list', { posts: posts });
