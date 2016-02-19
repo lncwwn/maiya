@@ -9,6 +9,7 @@
 
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
+const Boom = require('boom');
 const moment = require('moment');
 const md5 = require('md5');
 // api setting
@@ -21,6 +22,25 @@ module.exports = function(router) {
         this.body = yield this.render('login');
     });
     */
+
+    // 用户账户设置页面
+    router.get('/users/setting', function *() {
+
+        // 需要登录
+        if (!this.session.user) {
+            const referer = this.request.header.referer;
+            this.body = Boom.forbidden('this operation need user login');
+            this.redirect(referer);
+            return;
+        }
+
+        const userId = this.session.user.id;
+        const url = API_SETTING('get_user_by_id').replace('{id}', userId);
+        this.body = yield request.getAsync(url).then(res => {
+            return this.render('user_setting', {user: res.body});
+        });
+
+    });
 
     // 退出登录
     router.get('/users/logout', function *() {

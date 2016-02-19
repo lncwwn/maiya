@@ -10,6 +10,7 @@ module.exports = function(grunt) {
                     'assets/dist/css/index.css': 'assets/less/index.less',
                     'assets/dist/css/post.css': 'assets/less/post.less',
                     'assets/dist/css/login.css': 'assets/less/login.less',
+                    'assets/dist/css/user_setting.css': 'assets/less/user_setting.less'
                 }
             }
         },

@@ -24,6 +24,7 @@ const ApiRouter = new Router({
 // frontend router
 const CommonRouter = new Router();
 
+const siteRouter = require('./routes/siteRouter');
 const siteApiRouter = require('./routes/api/siteRouter');
 const userRouter = require('./routes/userRouter');
 const postRouter = require('./routes/postRouter');
@@ -56,6 +57,7 @@ app.use(ApiRouter.routes())
     .use(ApiRouter.allowedMethods())
     .use(CommonRouter.allowedMethods());
 
+siteRouter(CommonRouter);
 siteApiRouter(ApiRouter);
 userRouter(CommonRouter);
 postRouter(CommonRouter);

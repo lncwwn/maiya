@@ -1,0 +1,49 @@
+extends ./layout.jade
+block css
+    link(rel="stylesheet" href="/assets/dist/css/user_setting.css")
+block body
+    .uk-grid.uk-grid-collapse
+        .uk-width-1-1
+            ul.uk-breadcrumb
+                li
+                    a(href="/") 首页
+                li.uk-active
+                    span 用户设置
+            .art-user-setting.uk-grid
+                .uk-width-1-4
+                    .uk-panel.uk-panel-box
+                        //h3.uk-panel-title 用户设置
+                        .uk-nav-header 资料设置
+                        ul.uk-nav.uk-nav-side
+                            li.uk-active
+                                a(href="/") 个人资料
+                            li
+                                a(href="/") 修改头像
+                            li
+                                a(href="/") 修改密码
+                            li
+                                a(href="/") 修改邮箱
+                        .uk-nav-header 专栏设置
+                        ul.uk-nav.uk-nav-side
+                            li
+                                a(href="/") 专栏名称
+                            li
+                                a(href="/") 文章管理
+                .uk-width-3-4.uk-clearfix
+                    .setting-area.uk-float-right
+                        #profile-setting
+                            form.uk-form.uk-form-horizontal
+                                fieldset
+                                    legend 个人资料
+                                .uk-form-row
+                                    label.uk-form-label 性别
+                                    .uk-form-controls
+                                        //input.uk-width-large(type="text" name="gender")
+                                        input(type="radio" name="gender" value="1")
+                                        label &nbsp;男
+                                        input(type="radio" name="gender" value="0")
+                                        label &nbsp;女
+                                .uk-form-row
+                                    label.uk-form-label 生日
+                                    .uk-form-controls
+                                        input.uk-width-large(type="text" name="birthday")

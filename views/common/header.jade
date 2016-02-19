@@ -2,17 +2,17 @@
     .header-main.uk-clearfix
         .brand
             .title
-                a.link-white(href="/" title="麦芽")= "麦芽"
+                a.link-white(href="/" title="麦苗")= "麦苗"
             .sub-title -为品质生活努力-
                 //img.logo(src="/assets/img/maiya.png")
         .nav-left.uk-float-left
             ul.uk-list.ul-inline
                 li
-                    a(href="/site/discuss") 讨论
+                    a(href="/site/qa") 问答
                 li
                     a(href="/site/topic") 话题
                 li
-                    a(href="/site/posts") 文章
+                    a(href="/site/subject") 专栏
                 li
                     a(href="/site/shop") 商店
         ul.uk-float-right.uk-list.ul-inline.nav-right
@@ -21,12 +21,20 @@
                     a.link-white(href="/users/" + user.nick)= user.nick
                     .nav-dropdown
                             .nav-dropdown-item
-                                a(href="/") 账户设置
+                                a(href="/users/setting")
+                                    i.uk-icon-cog
+                                    span &nbsp;账户设置
                             .nav-dropdown-item
-                                a(href="/") 我的商店
+                                a(href="/users/shop")
+                                    i.uk-icon-shopping-bag
+                                    span &nbsp;我的商店
                             .nav-dropdown-item
-                                a(href="/") 我的文章
+                                a(href="/users/posts")
+                                    i.uk-icon-book
+                                    span &nbsp;我的文章
                             .nav-dropdown-item
-                                a(href="/users/logout") 退出登录
+                                a(href="/users/logout")
+                                    i.uk-icon-sign-out
+                                    span &nbsp;退出登录
                 - else
                     a.link-white#login-link(href="javascript:;" data-uk-modal="{target: '#login-modal',bgclose: false}")= "登录"
