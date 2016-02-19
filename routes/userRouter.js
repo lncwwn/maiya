@@ -22,4 +22,17 @@ module.exports = function(router) {
     });
     */
 
+    // 退出登录
+    router.get('/users/logout', function *() {
+
+        const referer = this.request.header.referer;
+        if (this.session.user) {
+            this.session.user = null;
+            this.cookies.set('user_session', null, {
+                expires: 0
+            });
+        }
+        this.redirect(referer);
+    });
+
 };

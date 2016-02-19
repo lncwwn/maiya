@@ -21,6 +21,12 @@ $('body')
 .on('click', '.progress-button', function(e) {
     e.preventDefault();
 })
+.on('mouseover', '.nav-has-dropdown', function(e) {
+    $('.nav-dropdown').show();
+})
+.on('mouseout', '.nav-has-dropdown', function(e) {
+    $('.nav-dropdown').hide();
+})
 // 监听注册时用户名输入
 .on('input', '#register-form input[name="nick"]', function(e) {
     clearTimeout(timer1);

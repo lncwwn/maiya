@@ -16,8 +16,17 @@
                 li
                     a(href="/site/shop") 商店
         ul.uk-float-right.uk-list.ul-inline.nav-right
-            li
+            li.nav-has-dropdown
                 - if (user)
                     a.link-white(href="/users/" + user.nick)= user.nick
+                    .nav-dropdown
+                            .nav-dropdown-item
+                                a(href="/") 账户设置
+                            .nav-dropdown-item
+                                a(href="/") 我的商店
+                            .nav-dropdown-item
+                                a(href="/") 我的文章
+                            .nav-dropdown-item
+                                a(href="/users/logout") 退出登录
                 - else
                     a.link-white#login-link(href="javascript:;" data-uk-modal="{target: '#login-modal',bgclose: false}")= "登录"

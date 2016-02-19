@@ -77,7 +77,41 @@ p, h1, h2, h3, h4, h5, h6, strong, a {
             }
         }
         .nav-right {
-            padding-top: 18px;
+            height: 100%;
+            .nav-has-dropdown {
+                width: 86px;
+                height: 100%;
+                position: relative;
+                text-align: center;
+                line-height: 55px;
+                .nav-dropdown {
+                    width: 100%;
+                    position: absolute;
+                    top: 55px;
+                    background-color: #028BB9;
+                    box-shadow: 0 1px 1px rgba(0,0,0,.3);
+                    border-radius: 0 0 3px 3px;
+                    display: none;
+                    .nav-dropdown-item {
+                        height: 45px;
+                        line-height: 45px;
+                        border-top: 1px solid #319CAD;
+                        a {
+                            color: #fff;
+                        }
+                    }
+                    .nav-dropdown-item:first-child {
+                        border-top: 0;
+                    }
+                    .nav-dropdown-item:hover {
+                        background-color: #0099cc;
+                    }
+                }
+            }
+            .nav-has-dropdown:hover {
+                background-color: #028BB9;
+                box-shadow: 0 1px 1px #888;
+            }
             .add-post-fun {
                 width: 26px;
                 height: 26px;
