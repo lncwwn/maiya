@@ -36,13 +36,13 @@ module.exports = function(router) {
     });
 
     // 加载文章详情页
-    router.get('/posts/:title', function *() {
+    router.get('/posts/:id', function *() {
 
-        let url = API_SETTING('get_post_by_title').replace('{title}', this.params.title);
+        let url = API_SETTING('get_post_by_id').replace('{id}', this.params.id);
         url = encodeURI(url);
         this.body = yield request.getAsync(url).then(res => {
             let body = JSON.parse(res.body);
-            body.lastModified = moment(body.lastModified).format('YYYY年MM月DD日 hh:mm:ss');
+            body.lastModified = util.normalDate(body.lastModified);
             return this.render('post', { post: body });
         }).catch(e => {
             console.log(e);

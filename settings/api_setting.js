@@ -18,6 +18,7 @@ const setting = {
     list_posts: "/posts",
     get_post_by_id: "/posts/id/{id}",
     get_post_by_title: "/posts/title/{title}",
+    new_post: "/posts/create",
     // users
     user_login: "/users/login",
     user_register: "/users/register",

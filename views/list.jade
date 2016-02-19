@@ -24,16 +24,17 @@ block body
                         .art-post.uk-clearfix
                             .art-author-avatar.uk-float-left
                             .art-post-title.uk-float-left
-                                a.title(href=encodeURI("/posts/" + post.title))= post.title
+                                a.title(href=encodeURI("/posts/" + post.id))= post.title
                                 .post-info.uk-clearfix
                                     .post-author.uk-float-left
                                         a(href="/users/" + post.user.nick)
                                             strong= post.user.nick
-                                        .separator-inline |
+                                        .separator-inline &nbsp;
+                                    span.uk-float-left= "最后修改"
+                                    .separator-inline.uk-float-left &nbsp;
                                     .post-date.uk-float-left
                                         //i.uk-icon-clock-o
-                                        span= "最后修改 "
-                                            strong= post.lastModified
+                                        strong= post.lastModified
                             .art-post-date.uk-float-right
                                 //span= post.lastModified
         .uk-width-1-4
