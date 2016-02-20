@@ -14,11 +14,14 @@
                 li
                     a(href="/site/subject") 专栏
                 li
-                    a(href="/site/shop") 商店
+                    a(href="/site/shop") 店铺
         ul.uk-float-right.uk-list.ul-inline.nav-right
             li.nav-has-dropdown
                 - if (user)
-                    a.link-white(href="/users/" + user.nick)= user.nick
+                    a.link-white(href="javascript:;")
+                        span= user.nick
+                        | &nbsp;
+                        i.uk-icon-angle-down
                     .nav-dropdown
                             .nav-dropdown-item
                                 a(href="/users/setting")
@@ -27,11 +30,11 @@
                             .nav-dropdown-item
                                 a(href="/users/shop")
                                     i.uk-icon-shopping-bag
-                                    span &nbsp;我的商店
+                                    span &nbsp;我的店铺
                             .nav-dropdown-item
                                 a(href="/users/posts")
                                     i.uk-icon-book
-                                    span &nbsp;我的文章
+                                    span &nbsp;我的专栏
                             .nav-dropdown-item
                                 a(href="/users/logout")
                                     i.uk-icon-sign-out
