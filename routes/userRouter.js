@@ -55,4 +55,24 @@ module.exports = function(router) {
         this.redirect(referer);
     });
 
+    // 用户的上铺
+    router.get('/users/shop', function *() {
+
+        // 需要登录
+        if (!this.session.user) {
+            const referer = this.request.header.referer;
+            this.body = Boom.forbidden('this operation need user login');
+            this.redirect(referer);
+            return;
+        }
+
+        const userId = this.session.user.id;
+        const url = API_SETTING('get_shop_by_user').replace('{id}', userId);
+        this.body = yield request.getAsync(url).then(res => {
+            const shop = res.body;
+            return this.render('users/shop', {shop: shop});
+        });
+
+    });
+
 };

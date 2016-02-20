@@ -1,5 +1,6 @@
 extends ./layout.jade
 block css
+    link(rel="stylesheet" href="/bower_components/uikit/css/components/datepicker.min.css")
     link(rel="stylesheet" href="/assets/dist/css/user_setting.css")
 block body
     .uk-grid.uk-grid-collapse
@@ -11,39 +12,81 @@ block body
                     span 用户设置
             .art-user-setting.uk-grid
                 .uk-width-1-4
-                    .uk-panel.uk-panel-box
-                        //h3.uk-panel-title 用户设置
-                        .uk-nav-header 资料设置
+                    .uk-panel.uk-panel-box.art-border
+                        .uk-nav-header.uk-text-primary
+                            i.uk-icon-navicon
+                            span &nbsp;资料设置
                         ul.uk-nav.uk-nav-side
                             li.uk-active
-                                a(href="/") 个人资料
+                                a(href="#profile-setting") 个人资料
                             li
-                                a(href="/") 修改头像
+                                a(href="#password-setting") 修改密码
                             li
-                                a(href="/") 修改密码
+                                a(href="#avatar-setting") 修改头像
                             li
-                                a(href="/") 修改邮箱
-                        .uk-nav-header 专栏设置
+                                a(href="#email") 修改邮箱
+                        .uk-nav-header.uk-text-primary
+                            i.uk-icon-navicon
+                            span &nbsp;专栏设置
                         ul.uk-nav.uk-nav-side
                             li
-                                a(href="/") 专栏名称
+                                a(href="#column") 专栏名称
                             li
-                                a(href="/") 文章管理
+                                a(href="#post") 文章管理
+                        .uk-nav-header.uk-text-primary
+                            i.uk-icon-navicon
+                            span &nbsp;店铺设置
+                        ul.uk-nav.uk-nav-side
+                            li
+                                a(href="#shop") 店铺设置
                 .uk-width-3-4.uk-clearfix
                     .setting-area.uk-float-right
                         #profile-setting
-                            form.uk-form.uk-form-horizontal
+                            form.uk-form.uk-form-horizontal#profile-setting
                                 fieldset
-                                    legend 个人资料
+                                    legend.uk-text-muted
+                                        i.uk-icon-user
+                                        span &nbsp;个人资料
                                 .uk-form-row
                                     label.uk-form-label 性别
                                     .uk-form-controls
-                                        //input.uk-width-large(type="text" name="gender")
                                         input(type="radio" name="gender" value="1")
                                         label &nbsp;男
+                                        .separator-inline &nbsp;
                                         input(type="radio" name="gender" value="0")
                                         label &nbsp;女
                                 .uk-form-row
                                     label.uk-form-label 生日
                                     .uk-form-controls
-                                        input.uk-width-large(type="text" name="birthday")
+                                        .uk-form-icon
+                                            i.uk-icon-calendar
+                                            input.uk-form-width-medium(type="text" name="birthday" data-uk-datepicker)
+                            form.uk-form.uk-form-horizontal#password-setting
+                                fieldset
+                                    legend.uk-text-muted
+                                        i.uk-icon-lock &nbsp;修改密码
+                                .uk-form-row
+                                    label.uk-form-label 旧密码
+                                    .uk-form-controls
+                                        .uk-form-icon
+                                            i.uk-icon-lock
+                                            input.uk-form-width-medium(type="password" name="old_password")
+                                .uk-form-row
+                                    label.uk-form-label 新密码
+                                    .uk-form-controls
+                                        .uk-form-icon
+                                            i.uk-icon-lock
+                                            input.uk-form-width-medium(type="password" name="password")
+                                .uk-form-row
+                                    label.uk-form-label 确认新密码
+                                    .uk-form-controls
+                                        .uk-form-icon
+                                            i.uk-icon-lock
+                                            input.uk-form-width-medium(type="password" name="check_password")
+                            form.uk-form.uk-form-horizontal#avatar-setting
+                                fieldset
+                                    legend.uk-text-muted
+                                        i.uk-icon-user &nbsp;修改头像
+
+block js-load
+    script(src="/bower_components/uikit/js/components/datepicker.min.js")

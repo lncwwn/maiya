@@ -23,7 +23,9 @@ const setting = {
     user_login: "/users/login",
     user_register: "/users/register",
     get_user_by_id: "/users/id/{id}",
-    get_user_by_nick: "/users/nick/{nick}"
+    get_user_by_nick: "/users/nick/{nick}",
+    // shops
+    get_shop_by_user: "/shops/user/{id}"
 };
 
 function apiPath(pathPart) {
