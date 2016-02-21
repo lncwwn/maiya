@@ -12,6 +12,7 @@ const request = Promise.promisifyAll(require('request'));
 const Boom = require('boom');
 const moment = require('moment');
 const md5 = require('md5');
+const _ = require('lodash');
 // api setting
 const API_SETTING = require('../settings/api_setting');
 
@@ -55,7 +56,7 @@ module.exports = function(router) {
         this.redirect(referer);
     });
 
-    // 用户的上铺
+    // 用户的店铺
     router.get('/users/shop', function *() {
 
         // 需要登录
@@ -69,8 +70,16 @@ module.exports = function(router) {
         const userId = this.session.user.id;
         const url = API_SETTING('get_shop_by_user').replace('{id}', userId);
         this.body = yield request.getAsync(url).then(res => {
-            const shop = res.body;
-            return this.render('users/shop', {shop: shop});
+            const _data = JSON.parse(res.body);
+            let data = {};
+            if (_data.statusCode === 404) {
+                data.shop_active = false;
+            } else if (_data.id || _data.name) {
+                // 店铺有id和name属性
+                data.shop_active = true;
+                data = _.extend(data, _data);
+            }
+            return this.render('users/shop', {data: data});
         });
 
     });

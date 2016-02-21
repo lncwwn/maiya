@@ -10,6 +10,7 @@
 window.jQuery = window.$ = require('jquery');
 const modal = require('./modal');
 const User = require('./user');
+const UserSetting = require('./user_setting');
 
 let timer1 = null;
 let timer2 = null;
@@ -226,3 +227,4 @@ $('body')
 });
 
 modal.events();
+UserSetting.events();

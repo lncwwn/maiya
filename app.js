@@ -28,8 +28,11 @@ const siteRouter = require('./routes/siteRouter');
 const siteApiRouter = require('./routes/api/siteRouter');
 const userRouter = require('./routes/userRouter');
 const postRouter = require('./routes/postRouter');
+const shopRouter = require('./routes/shopRouter');
 const userApiRouter = require('./routes/api/userRouter');
 const postApiRouter = require('./routes/api/postRouter');
+const shopApiRouter = require('./routes/api/shopRouter');
+
 
 app.name = 'maiya';
 // for sign cookie
@@ -61,8 +64,10 @@ siteRouter(CommonRouter);
 siteApiRouter(ApiRouter);
 userRouter(CommonRouter);
 postRouter(CommonRouter);
+shopRouter(CommonRouter);
 userApiRouter(ApiRouter);
 postApiRouter(ApiRouter);
+shopApiRouter(ApiRouter);
 
 app.use(staticServe({rootDir: __dirname + '/assets', rootPath: '/assets'}));
 app.use(staticServe({rootDir: __dirname + '/bower_components', rootPath: '/bower_components'}));

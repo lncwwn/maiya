@@ -1,2 +1,9 @@
 extends ../layout.jade
 block body
+    .uk-grid.uk-grid-collapse
+        .uk-container-center
+        - if (!data || !data.shop_active)
+            .uk-alert.uk-alert-warning 您的店铺尚未开通，无法查看店铺信息
+            a.uk-button.uk-button-large.uk-button-primary(type="button" href="/users/setting#shop-setting") 开通店铺
+        - else
+            h3= data.name
