@@ -1,7 +1,7 @@
 extends ./layout.jade
 block css
     link(rel="stylesheet" href="/bower_components/uikit/css/components/datepicker.min.css")
-    link(rel="stylesheet" href="/bower_components/uikit/css/components/upload.min.css")
+    //link(rel="stylesheet" href="/bower_components/uikit/css/components/upload.min.css")
     link(rel="stylesheet" href="/assets/dist/css/user_setting.css")
 block body
     .uk-grid.uk-grid-collapse
@@ -94,8 +94,8 @@ block body
                                         i.uk-icon-image &nbsp;修改头像
                                 figure.uk-overlay
                                     img(src="/assets/img/avatar.svg")
-                                    figcaption.uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
-                                        a(href="javascript:;") 更换头像
+                                    figcaption.uk-overlay-panel.uk-overlay-background.uk-overlay-bottom#test
+                                        a#avatar-upload(href="javascript:;") 更换头像
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary 确认更换
                             form.uk-form.uk-form-horizontal#shop-setting
@@ -111,14 +111,13 @@ block body
                                 .uk-form-row
                                     label.uk-form-label 品牌图片
                                     .uk-form-controls
-                                        .uk-placeholder
-                                            i.uk-icon-cloud-upload.uk-icon-medium.uk-text-muted.uk-margin-small-right
-                                            span 请拖动图片到此或
-                                            a.uk-form-file 选择图片上传
-                                                input(type="file")
+                                        input(type="file")
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary 开通店铺
 
 block js-load
     script(src="/bower_components/uikit/js/components/datepicker.min.js")
-    script(src="/bower_components/uikit/js/components/upload.min.js")
+    script(src="/bower_components/plupload/js/moxie.js")
+    script(src="/bower_components/plupload/js/plupload.dev.js")
+    script(src="/bower_components/js-sdk/src/qiniu.js")
+    script(src="/assets/dist/js/user_setting.js")

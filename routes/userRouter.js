@@ -76,8 +76,11 @@ module.exports = function(router) {
                 data.shop_active = false;
             } else if (_data.id || _data.name) {
                 // 店铺有id和name属性
-                data.shop_active = true;
-                data = _.extend(data, _data);
+                data.shop_active = false;
+                if (_data.active) {
+                    data.shop_active = true;
+                    data = _.extend(data, _data);
+                }
             }
             return this.render('users/shop', {data: data});
         });

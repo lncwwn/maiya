@@ -7,7 +7,7 @@
 
 'use strict';
 
-window.jQuery = window.$ = require('jquery');
+//window.jQuery = window.$ = require('jquery');
 
 module.exports = {
 
