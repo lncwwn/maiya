@@ -12,6 +12,7 @@ const APP_SETTING = require('./settings/app_setting.json');
 
 const Router = require('koa-router');
 const staticServe = require('koa-static-server');
+const koaBody = require('koa-body');
 const bodyParser = require('koa-body-parser');
 const session = require('koa-session');
 const app = require('./koa');
@@ -38,6 +39,7 @@ app.name = 'maiya';
 // for sign cookie
 app.keys = ['test01', 'test02', 'test03'];
 
+app.use(koaBody({multipart: true}));
 // request body parser
 app.use(bodyParser());
 

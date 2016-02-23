@@ -18,7 +18,7 @@ const API_SETTING = require('../../settings/api_setting');
 module.exports = function(router) {
 
     // 开通店铺
-    router.post('/posts/active', function *() {
+    router.post('/shop/active', function *() {
 
         if (!this.session.user) {
             this.body = Boom.forbidden('this operation need user login');
