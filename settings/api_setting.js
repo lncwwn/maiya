@@ -27,7 +27,12 @@ const setting = {
     update_user: "/users/{id}",
     // shops
     get_shop_by_user: "/shops/user/{id}",
-    active_shop: "/shops/active"
+    active_shop: "/shops/active",
+    // topic
+    get_topic_by_user: "/topics/user/{id}",
+    // column
+    get_column_by_user: "/columns/user/{id}",
+    list_columns: "/columns",
 };
 
 function apiPath(pathPart) {

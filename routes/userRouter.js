@@ -66,9 +66,8 @@ module.exports = function(router) {
 
         // 需要登录
         if (!this.session.user) {
-            const referer = this.request.header.referer;
             this.body = Boom.forbidden('this operation need user login');
-            this.redirect(referer);
+            this.redirect('/site/shop');
             return;
         }
 
@@ -84,10 +83,50 @@ module.exports = function(router) {
                 data.shop_active = false;
                 if (_data.active) {
                     data.shop_active = true;
+                    if (_data.user && _data.user.avatar) {
+                        _data.user.avatar = APP_SETTING['qiniu']['url'] + '/' + _data.user.avatar;
+                    }
                     data = _.extend(data, _data);
                 }
             }
             return this.render('users/shop', {data: data});
+        });
+
+    });
+
+    router.get('/users/topic', function *() {
+
+        // 需要登录
+        if (!this.session.user) {
+            this.body = Boom.forbidden('this operation need user login');
+            this.redirect('/site/topic');
+            return;
+        }
+
+        const userId = this.session.user.id;
+        const url = API_SETTING('get_topic_by_user').replace('{id}', userId);
+        this.body = yield request.getAsync(url).then(res => {
+            const data = res.body;
+            return this.render('/users/topic', {data: data});
+        });
+
+    });
+
+    // 用户的专栏
+    router.get('/users/column', function *() {
+
+        // 需要登录
+        if (!this.session.user) {
+            this.body = Boom.forbidden('this operation need user login');
+            this.redirect('/site/column');
+            return;
+        }
+
+        const userId = this.session.user.id;
+        const url = API_SETTING('get_column_by_user').replace('{id}', userId);
+        this.body = yield request.getAsync(url).then(res => {
+            const data = res.body;
+            return this.render('/users/column', {data: data});
         });
 
     });

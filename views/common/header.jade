@@ -7,14 +7,14 @@
                 //img.logo(src="/assets/img/maiya.png")
         .nav-left.uk-float-left
             ul.uk-list.ul-inline
-                li
-                    a(href="/site/qa") 问答
+                //li
+                //    a(href="/site/qa") 问答
                 li
                     a(href="/site/topic") 话题
                 li
-                    a(href="/site/subject") 专栏
-                li
-                    a(href="/site/shop") 店铺
+                    a(href="/site/column") 专栏
+                //li
+                //    a(href="/site/shop") 店铺
         ul.uk-float-right.uk-list.ul-inline.nav-right
             li.nav-has-dropdown
                 - if (user)
@@ -27,12 +27,12 @@
                                 a(href="/users/setting")
                                     i.uk-icon-cog
                                     span &nbsp;账户设置
+                            //.nav-dropdown-item
+                            //    a(href="/users/shop")
+                            //        i.uk-icon-shopping-bag
+                            //        span &nbsp;我的店铺
                             .nav-dropdown-item
-                                a(href="/users/shop")
-                                    i.uk-icon-shopping-bag
-                                    span &nbsp;我的店铺
-                            .nav-dropdown-item
-                                a(href="/users/posts")
+                                a(href="/users/column")
                                     i.uk-icon-book
                                     span &nbsp;我的专栏
                             .nav-dropdown-item

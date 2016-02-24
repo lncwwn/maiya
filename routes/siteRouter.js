@@ -27,9 +27,9 @@ module.exports = function(router) {
         this.body = yield this.render('topic');
     });
 
-    // 专题
-    router.get('/site/subject', function *() {
-        this.body = yield this.render('subject');
+    // 专栏
+    router.get('/site/column', function *() {
+        this.body = yield this.render('column');
     });
 
     // 商店

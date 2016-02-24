@@ -62,8 +62,20 @@ const progressbar = $("#progressbar"),
 
 const select = UIkit.uploadSelect($("#actual-avatar-select"), settings);
 
+function activeShop(name) {
+    const url = '/api/shop/active';
+    util.ajax('POST', url, {name: name}).done(function(data) {
+        console.log(data);
+    }).fail(function(err) {
+        console.log(err);
+    });
+}
+
 $('body').on('click', '#shop-setting button', function(e) {
     e.preventDefault();
 }).on('click', '#avatar-select', function(e) {
     $('#actual-avatar-select').click();
+}).on('click', '#avtive-shop-button', function(e) {
+    const shopName = $('#shop-setting input').val();
+    activeShop(shopName);
 });

@@ -17,6 +17,11 @@ const API_SETTING = require('../../settings/api_setting');
 
 module.exports = function(router) {
 
+    // 查看用户店铺信息
+    router.get('/shop/user/:id', function() {
+        //
+    });
+
     // 开通店铺
     router.post('/shop/active', function *() {
 
@@ -26,9 +31,15 @@ module.exports = function(router) {
         }
 
         const name = this.request.body.name;
-        const userId = this.request.body.userId;
+
         const url = API_SETTING('active_shop');
-        this.body = yield request.postAsync(url).then(res => {
+        this.body = yield request.postAsync({
+            url: url,
+            form: {
+                user_id: this.session.user.id,
+                name: name
+            }
+        }).then(res => {
             return res.body;
         });
 
