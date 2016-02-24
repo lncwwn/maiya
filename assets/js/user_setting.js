@@ -11,7 +11,8 @@ const progressbar = $("#progressbar"),
     bar = progressbar.find('.uk-progress-bar'),
     settings = {
         action: '/api/site/upload',
-        allow : '*.(jpg|jpeg|gif|png)', // allow only images
+        params: {bucket_name: 'avatar'},
+        allow : '*.(jpg|jpeg|gif|png)',
         loadstart: function() {
             bar.css("width", "0%").text("0%");
             progressbar.removeClass("uk-hidden");

@@ -11,6 +11,7 @@ const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('request'));
 const moment = require('moment');
 const Boom = require('boom');
+const APP_SETTING = require('../../settings/app_setting');
 // api setting
 const API_SETTING = require('../../settings/api_setting');
 const util = require('../../modules/util');
@@ -43,10 +44,18 @@ module.exports = function(router) {
      */
     router.post('/site/upload', function *() {
 
+        // 要上传到的bucket类型
+        const bucket_name = this.request.body.fields.bucket_name;
+        if (!bucket_name) {
+            this.body = Boom.badRequest('bucket name cannot be empty');
+            return;
+        }
+
+        const bucket = APP_SETTING['qiniu']['bucket'][bucket_name];
         const name = 'avatar_' + this.session.user.nick + '_' + new Date().getTime();
         const file = this.request.body.files['files[]']['path'];
 
-        this.body = yield upload.upload(upload.uptoken('my-avatar'), name, file).then(function(res) {
+        this.body = yield upload.upload(upload.uptoken(bucket), name, file).then(function(res) {
             return res.key;
         }).catch(function(err) {
             return Boom.wrap(new Error(err.error), err.code, err.error);
