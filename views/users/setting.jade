@@ -95,7 +95,7 @@ block body
                                         i.uk-icon-image &nbsp;修改头像
                                 figure.uk-overlay
                                     if current_user.avatar
-                                        img(src=current_user.avatar)
+                                        img(src=current_user.avatar+"?imageView2/0/w/200/h/200")
                                     else
                                         img(src="/assets/img/avatar.svg")
                                     figcaption.uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
