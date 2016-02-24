@@ -55,8 +55,12 @@ module.exports = function(router) {
         const name = 'avatar_' + this.session.user.nick + '_' + new Date().getTime();
         const file = this.request.body.files['files[]']['path'];
 
-        this.body = yield upload.upload(upload.uptoken(bucket), name, file).then(function(res) {
-            return res.key;
+        const uptoken = upload.uptoken(bucket);
+        this.body = yield upload.upload(uptoken, name, file).then(function(res) {
+            return {
+                upload: true,
+                name: res.key
+            };
         }).catch(function(err) {
             return Boom.wrap(new Error(err.error), err.code, err.error);
         });

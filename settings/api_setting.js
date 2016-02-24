@@ -24,6 +24,7 @@ const setting = {
     user_register: "/users/register",
     get_user_by_id: "/users/id/{id}",
     get_user_by_nick: "/users/nick/{nick}",
+    update_user: "/users/{id}",
     // shops
     get_shop_by_user: "/shops/user/{id}",
     active_shop: "/shops/active"

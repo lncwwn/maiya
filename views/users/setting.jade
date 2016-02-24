@@ -1,4 +1,4 @@
-extends ./layout.jade
+extends ../layout.jade
 block css
     link(rel="stylesheet" href="/bower_components/uikit/css/components/datepicker.min.css")
     link(rel="stylesheet" href="/bower_components/uikit/css/components/upload.min.css")
@@ -46,7 +46,7 @@ block body
                         #profile-setting
                             form.uk-form.uk-form-horizontal#profile-setting
                                 fieldset
-                                    legend.uk-text-muted
+                                    legend.uk-text-primary
                                         i.uk-icon-user
                                         span &nbsp;个人资料
                                 .uk-form-row
@@ -67,7 +67,7 @@ block body
                                     button.uk-button.uk-button-primary 确认提交
                             form.uk-form.uk-form-horizontal#password-setting
                                 fieldset
-                                    legend.uk-text-muted
+                                    legend.uk-text-primary
                                         i.uk-icon-lock &nbsp;修改密码
                                 .uk-form-row
                                     label.uk-form-label 旧密码
@@ -91,20 +91,22 @@ block body
                                     button.uk-button.uk-button-primary 确认修改
                             form.uk-form.uk-form-horizontal#avatar-setting
                                 fieldset
-                                    legend.uk-text-muted
+                                    legend.uk-text-primary
                                         i.uk-icon-image &nbsp;修改头像
                                 figure.uk-overlay
-                                    img(src="/assets/img/avatar.svg")
+                                    if current_user.avatar
+                                        img(src=current_user.avatar)
+                                    else
+                                        img(src="/assets/img/avatar.svg")
                                     figcaption.uk-overlay-panel.uk-overlay-background.uk-overlay-bottom
                                         a#avatar-select(href="javascript:;") 更换头像
                                         input#actual-avatar-select.uk-hidden(type="file" name="avatar")
                                 #progressbar.uk-progress.uk-hidden
                                     .uk-progress-bar(style="width: 0%;")
-                                .uk-form-row.uk-text-right
-                                    button.uk-button.uk-button-primary#avatar-upload 确认更换
+                            br
                             form.uk-form.uk-form-horizontal#shop-setting
                                 fieldset
-                                    legend.uk-text-muted
+                                    legend.uk-text-primary
                                         i.uk-icon-shopping-bag &nbsp;店铺设置
                                 .uk-form-row
                                     label.uk-form-label 店铺名
@@ -118,6 +120,7 @@ block body
                                         input(type="file")
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary 开通店铺
+    input#user-id(type="hidden" value=user.id)
 
 block js-load
     script(src="/bower_components/uikit/js/components/datepicker.min.js")

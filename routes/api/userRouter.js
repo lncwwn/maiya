@@ -12,6 +12,7 @@ const request = Promise.promisifyAll(require('request'));
 const Boom = require('boom');
 const moment = require('moment');
 const md5 = require('md5');
+const _ = require('lodash');
 // api setting
 const API_SETTING = require('../../settings/api_setting');
 
@@ -108,6 +109,31 @@ module.exports = function(router) {
         }).then(res => {
             return res.body;
         });
+    });
+
+    /**
+     * 用户资料更新
+     * method: POST
+     */
+    router.post('/users/:id', function *() {
+
+        const id = this.params.id;
+        if (!this.session.user || this.session.user.id === id) {
+            this.body = Boom.unauthorized('this operation need authorized');
+            return;
+        }
+
+        const updated = {updated: new Date()};
+        const formData = _.extend(updated, this.request.body);
+
+        const url =  API_SETTING('update_user').replace('{id}', id);
+        this.body = yield request.putAsync({
+            url: url,
+            form: formData
+        }).then(res => {
+            return res.body;
+        });
+
     });
 
 };

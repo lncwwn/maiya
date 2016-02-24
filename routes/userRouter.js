@@ -13,6 +13,7 @@ const Boom = require('boom');
 const moment = require('moment');
 const md5 = require('md5');
 const _ = require('lodash');
+const APP_SETTING = require('../settings/app_setting');
 // api setting
 const API_SETTING = require('../settings/api_setting');
 
@@ -29,16 +30,20 @@ module.exports = function(router) {
 
         // 需要登录
         if (!this.session.user) {
-            const referer = this.request.header.referer;
             this.body = Boom.forbidden('this operation need user login');
-            this.redirect(referer);
+            this.redirect('/');
             return;
         }
 
         const userId = this.session.user.id;
         const url = API_SETTING('get_user_by_id').replace('{id}', userId);
         this.body = yield request.getAsync(url).then(res => {
-            return this.render('user_setting', {user: res.body});
+            let data = JSON.parse(res.body);
+            if (data.avatar) {
+                data.avatar = APP_SETTING['qiniu']['url'] + '/' + data.avatar;
+            }
+
+            return this.render('users/setting', {current_user: data});
         });
 
     });
