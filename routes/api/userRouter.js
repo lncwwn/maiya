@@ -13,6 +13,7 @@ const Boom = require('boom');
 const moment = require('moment');
 const md5 = require('md5');
 const _ = require('lodash');
+const APP_SETTING = require('../../settings/app_setting');
 // api setting
 const API_SETTING = require('../../settings/api_setting');
 
@@ -69,10 +70,15 @@ module.exports = function(router) {
                     //expires: new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000),
                     //signed: true
                 //});
+                let _avatar = '';
+                if (user.avatar) {
+                    _avatar += APP_SETTING['qiniu']['url'] + '/' + user.avatar;
+                }
                 // set login session
                 this.session.user = {
                     id: user.id,
-                    nick: user.nick
+                    nick: user.nick,
+                    avatar: _avatar
                 };
             }
             return user;

@@ -19,6 +19,10 @@
             li.nav-has-dropdown
                 - if (user)
                     a.link-white(href="javascript:;")
+                        if (user.avatar)
+                            img.user-avatar(src=user.avatar+"?imageView2/0/w/30/h/30")
+                        else
+                            img.user-avatar(src="/assets/img/avatar.svg")
                         span= user.nick
                         | &nbsp;
                         i.uk-icon-angle-down

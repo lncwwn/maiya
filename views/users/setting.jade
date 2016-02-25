@@ -32,7 +32,7 @@ block body
                             span &nbsp;专栏设置
                         ul.uk-nav.uk-nav-side
                             li
-                                a(href="#column") 专栏名称
+                                a(href="#column-setting") 专栏设置
                             li
                                 a(href="#post") 文章管理
                         .uk-nav-header.uk-text-primary
@@ -104,7 +104,7 @@ block body
                                 #progressbar.uk-progress.uk-hidden
                                     .uk-progress-bar(style="width: 0%;")
                             br
-                            form.uk-form.uk-form-horizontal#shop-setting
+                            form.uk-form.uk-form-horizontal#shop-setting.uk-hidden
                                 fieldset
                                     legend.uk-text-primary
                                         i.uk-icon-shopping-bag &nbsp;店铺设置
@@ -120,6 +120,18 @@ block body
                                 //        input(type="file")
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary#avtive-shop-button 开通店铺
+                            form.uk-form.uk-form-horizontal#column-setting
+                                fieldset
+                                    legend.uk-text-primary
+                                        i.uk-icon-shopping-bag &nbsp;专栏设置
+                                .uk-form-row
+                                    label.uk-form-label 专栏名称
+                                    .uk-form-controls
+                                        .uk-form-icon
+                                            i.uk-icon-registered
+                                            input.uk-form-width-medium(type="text" name="column_name")
+                                .uk-form-row.uk-text-right
+                                    button.uk-button.uk-button-primary#avtive-column-button 开通专栏
     input#user-id(type="hidden" value=user.id)
 
 block js-load

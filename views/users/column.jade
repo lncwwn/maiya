@@ -1,11 +1,12 @@
-extends ../layout.jade
+extends ../broad-layout.jade
+block css
+    link(rel="stylesheet" href="/assets/dist/css/column.css")
 block body
     .uk-grid.uk-grid-collapse
         .uk-width-1-1
-            - if (!data || !data.column_active)
-                .uk-alert.uk-alert-warning 您的专栏尚未开通，无法查看专栏信息
-                a.uk-button.uk-button-large.uk-button-primary(type="button" href="/users/setting#shop-setting") 开通专栏
-            - else
-                .uk-block.uk-block-default
-                    h3= data.name
-                    img(src=data.user.avatar)
+            .uk-block.art-column-banner
+                .art-column-banner-main
+                    if (!data || !data.column_active)
+                        .uk-text-left
+                            span 您的专栏尚未开通，马上开通一个吧。
+                            a.uk-button.uk-button-large.uk-button-success(type="button" href="/users/setting#column-setting") 开通专栏
