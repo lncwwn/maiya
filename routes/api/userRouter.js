@@ -137,7 +137,11 @@ module.exports = function(router) {
             url: url,
             form: formData
         }).then(res => {
-            return res.body;
+            const data = JSON.parse(res.body);
+            if (formData.avatar && data && data[0] === 1) {
+                this.session.user.avatar = APP_SETTING['qiniu']['url'] + '/' + formData.avatar;
+            }
+            return data;
         });
 
     });
