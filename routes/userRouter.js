@@ -29,11 +29,7 @@ module.exports = function(router) {
     router.get('/users/setting', function *() {
 
         // 需要登录
-        if (!this.session.user) {
-            this.body = Boom.forbidden('this operation need user login');
-            this.redirect('/');
-            return;
-        }
+        this.assert(this.session.user, 401, 'this operation need user login');
 
         const userId = this.session.user.id;
         const url = API_SETTING('get_user_by_id').replace('{id}', userId);
@@ -65,11 +61,7 @@ module.exports = function(router) {
     router.get('/users/shop', function *() {
 
         // 需要登录
-        if (!this.session.user) {
-            this.body = Boom.forbidden('this operation need user login');
-            this.redirect('/site/shop');
-            return;
-        }
+        this.assert(this.session.user, 401, 'this operation need user login');
 
         const userId = this.session.user.id;
         const url = API_SETTING('get_shop_by_user').replace('{id}', userId);
@@ -97,11 +89,7 @@ module.exports = function(router) {
     router.get('/users/topic', function *() {
 
         // 需要登录
-        if (!this.session.user) {
-            this.body = Boom.forbidden('this operation need user login');
-            this.redirect('/site/topic');
-            return;
-        }
+        this.assert(this.session.user, 401, 'this operation need user login');
 
         const userId = this.session.user.id;
         const url = API_SETTING('get_topic_by_user').replace('{id}', userId);
@@ -115,12 +103,7 @@ module.exports = function(router) {
     // 用户的专栏
     router.get('/users/column', function *() {
 
-        // 需要登录
-        if (!this.session.user) {
-            this.body = Boom.forbidden('this operation need user login');
-            this.redirect('/site/column');
-            return;
-        }
+        this.assert(this.session.user, 401, 'this operation need user login');
 
         const userId = this.session.user.id;
         const url = API_SETTING('get_column_by_user').replace('{id}', userId);

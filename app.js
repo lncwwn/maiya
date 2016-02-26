@@ -14,7 +14,6 @@ const Router = require('koa-router');
 const staticServe = require('koa-static-server');
 const koaBody = require('koa-body');
 const session = require('koa-session');
-const error = require('koa-error');
 const app = require('./koa');
 
 // api router
@@ -56,6 +55,26 @@ app.use(function *(next) {
     yield next;
 });
 
+function errorHandler(err, ctx) {
+    if (err.status === 404) {
+        ctx.response.redirect('/404');
+    } else if (err.status === 401) {
+        ctx.response.redirect('/#login');
+    } else {
+        ctx.response.redirect('/error');
+    }
+};
+
+// catch 404
+// todo add log
+app.use(function *(next) {
+    try {
+        yield next;
+    } catch(err) {
+        errorHandler(err, this);
+    }
+});
+
 // router
 app.use(ApiRouter.routes())
     .use(CommonRouter.routes())
@@ -76,19 +95,6 @@ columnApiRouter(ApiRouter);
 app.use(staticServe({rootDir: __dirname + '/assets', rootPath: '/assets'}));
 app.use(staticServe({rootDir: __dirname + '/bower_components', rootPath: '/bower_components'}));
 
-// catch 404
-app.use(function *(next) {
-    if (this.response.status === 404) {
-        this.response.redirect('/404');
-    }
-    yield next;
-});
-
-app.on('error', error => {
-    console.log(error);
-    log.error('500', error);
-    this.response.redirect('/error');
-});
 
 const PORT = APP_SETTING.port;
 app.listen(PORT);

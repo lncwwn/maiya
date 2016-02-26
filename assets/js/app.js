@@ -10,6 +10,7 @@
 //window.jQuery = window.$ = require('jquery');
 const modal = require('./modal');
 const User = require('./user');
+const listener = require('./listener');
 
 let timer1 = null;
 let timer2 = null;
@@ -225,4 +226,5 @@ $('body')
     });
 });
 
+listener.loginListener();
 modal.events();
