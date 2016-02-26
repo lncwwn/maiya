@@ -33,6 +33,7 @@ const setting = {
     // column
     get_column_by_user: "/columns/user/{id}",
     list_columns: "/columns",
+    active_column: "/columns/active"
 };
 
 function apiPath(pathPart) {

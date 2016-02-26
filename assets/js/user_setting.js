@@ -62,8 +62,25 @@ const progressbar = $("#progressbar"),
 
 const select = UIkit.uploadSelect($("#actual-avatar-select"), settings);
 
+/**
+ * 激活店铺
+ * @param name 店铺名称
+ */
 function activeShop(name) {
     const url = '/api/shop/active';
+    util.ajax('POST', url, {name: name}).done(function(data) {
+        console.log(data);
+    }).fail(function(err) {
+        console.log(err);
+    });
+}
+
+/**
+ * 激活专栏
+ * @param name 专栏名称
+ */
+function activeColumn(name) {
+    const url = '/api/columns/active';
     util.ajax('POST', url, {name: name}).done(function(data) {
         console.log(data);
     }).fail(function(err) {
@@ -76,6 +93,11 @@ $('body').on('click', '#shop-setting button', function(e) {
 }).on('click', '#avatar-select', function(e) {
     $('#actual-avatar-select').click();
 }).on('click', '#avtive-shop-button', function(e) {
+    e.preventDefault();
     const shopName = $('#shop-setting input').val();
     activeShop(shopName);
+}).on('click', '#active-column-button', function(e) {
+    e.preventDefault();
+    const columnName = $('#column-setting input').val();
+    activeColumn(columnName);
 });

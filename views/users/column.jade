@@ -6,7 +6,11 @@ block body
         .uk-width-1-1
             .uk-block.art-column-banner
                 .art-column-banner-main
-                    if (!data || !data.column_active)
+                    if (!data || !data.active)
                         .uk-text-left
                             span 您的专栏尚未开通，马上开通一个吧。
                             a.uk-button.uk-button-large.uk-button-success(type="button" href="/users/setting#column-setting") 开通专栏
+                    else
+                        .uk-text-left
+                            h2.uk-text-muted= data.name
+                            p.uk-text-muted= "创建于" + data.lastModified

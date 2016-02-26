@@ -125,8 +125,13 @@ module.exports = function(router) {
         const userId = this.session.user.id;
         const url = API_SETTING('get_column_by_user').replace('{id}', userId);
         this.body = yield request.getAsync(url).then(res => {
-            const data = res.body;
-            return this.render('/users/column', {data: data});
+            if (res) {
+                const data = JSON.parse(res.body);
+                data.lastModified = data.updated?data.updated:data.created;
+                data.lastModified = moment(data.lastModified).format('YYYY年MM月DD日');
+                return this.render('/users/column', {data: data});
+            }
+            return Boom.notFound('column not found');
         });
 
     });
