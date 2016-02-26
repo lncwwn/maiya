@@ -37,4 +37,14 @@ module.exports = function(router) {
         this.body = yield this.render('shop');
     });
 
+    // 500
+    router.get('/error', function *() {
+        this.body = yield this.render('500');
+    });
+
+    // 404
+    router.get('/404', function *() {
+        this.body = yield this.render('404');
+    });
+
 };

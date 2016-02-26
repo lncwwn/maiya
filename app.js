@@ -76,9 +76,18 @@ columnApiRouter(ApiRouter);
 app.use(staticServe({rootDir: __dirname + '/assets', rootPath: '/assets'}));
 app.use(staticServe({rootDir: __dirname + '/bower_components', rootPath: '/bower_components'}));
 
+// catch 404
+app.use(function *(next) {
+    if (this.response.status === 404) {
+        this.response.redirect('/404');
+    }
+    yield next;
+});
+
 app.on('error', error => {
     console.log(error);
     log.error('500', error);
+    this.response.redirect('/error');
 });
 
 const PORT = APP_SETTING.port;
