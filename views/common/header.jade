@@ -17,7 +17,7 @@
                 //    a(href="/site/shop") 店铺
         ul.uk-float-right.uk-list.ul-inline.nav-right
             li.nav-has-dropdown
-                - if (user)
+                if (user)
                     a.link-white(href="javascript:;")
                         if (user.avatar)
                             img.user-avatar(src=user.avatar+"?imageView2/0/w/30/h/30")
@@ -27,21 +27,18 @@
                         | &nbsp;
                         i.uk-icon-angle-down
                     .nav-dropdown
+                        a(href="/users/setting")
                             .nav-dropdown-item
-                                a(href="/users/setting")
-                                    i.uk-icon-cog
-                                    span &nbsp;账户设置
-                            //.nav-dropdown-item
-                            //    a(href="/users/shop")
-                            //        i.uk-icon-shopping-bag
-                            //        span &nbsp;我的店铺
+                                i.uk-icon-cog
+                                span &nbsp;账户设置
+                        a(href="/users/column")
                             .nav-dropdown-item
-                                a(href="/users/column")
-                                    i.uk-icon-book
-                                    span &nbsp;我的专栏
+                                i.uk-icon-book
+                                span &nbsp;我的专栏
+                        a(href="/users/logout")
                             .nav-dropdown-item
-                                a(href="/users/logout")
-                                    i.uk-icon-sign-out
-                                    span &nbsp;退出登录
+                                i.uk-icon-sign-out
+                                span &nbsp;退出登录
+                    input#current-user(type="hidden" value=user.nick)
                 - else
                     a.link-white#login-link(href="javascript:;" data-uk-modal="{target: '#login-modal',bgclose: false}")= "登录"

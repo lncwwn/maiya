@@ -17,12 +17,22 @@ const API_SETTING = require('../../settings/api_setting');
 
 module.exports = function(router) {
 
+    // get posts list by column
+    router.get('/posts/column/:id', function *() {
+        const columnId = this.params.id;
+        const url = API_SETTING('list_posts_by_column').replace('{id}', columnId);
+        this.body = yield request.getAsync(url).then(res => {
+            return JSON.parse(res.body);
+        });
+
+        return Boom.badRequest('parameter id must be a valid number');
+    });
+
     // create new post
     router.post('/posts/create', function *() {
-        if (!this.session.user) {
-            this.body = Boom.forbidden('this operation need user login');
-            return;
-        }
+
+        this.assert(this.session.user, 401, 'this operation need user login');
+
         const url = API_SETTING('new_post');
 
         const title = this.request.body.title;

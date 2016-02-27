@@ -13,7 +13,8 @@ function getUrlHash() {
 };
 
 function handlerUrlHash(hash) {
-    if (hash.indexOf('login') > -1) {
+    const currentUserNick = $('#current-user').val();
+    if (!currentUserNick && hash.indexOf('login') > -1) {
         const loginModal = UIkit.modal('#login-modal');
         loginModal.show();
     }
@@ -22,3 +23,4 @@ function handlerUrlHash(hash) {
 module.exports.loginListener = function() {
     handlerUrlHash(getUrlHash());
 };
+

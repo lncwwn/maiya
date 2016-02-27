@@ -16,6 +16,7 @@ const PORT = 30000;
 const setting = {
     // posts
     list_posts: "/posts",
+    list_posts_by_column: "/posts/column/{id}",
     get_post_by_id: "/posts/id/{id}",
     get_post_by_title: "/posts/title/{title}",
     new_post: "/posts/create",

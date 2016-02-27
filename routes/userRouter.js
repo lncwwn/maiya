@@ -107,13 +107,17 @@ module.exports = function(router) {
 
         const userId = this.session.user.id;
         const url = API_SETTING('get_column_by_user').replace('{id}', userId);
+
         this.body = yield request.getAsync(url).then(res => {
             if (res) {
-                const data = JSON.parse(res.body);
-                data.lastModified = data.updated?data.updated:data.created;
-                data.lastModified = moment(data.lastModified).format('YYYY年MM月DD日');
-                return this.render('/users/column', {data: data});
+                const column = JSON.parse(res.body);
+                if (column.active) {
+                    column.lastModified = column.updated?column.updated:column.created;
+                    column.lastModified = moment(column.lastModified).format('YYYY年MM月DD日');
+                }
+                return this.render('/users/column', {column: column});
             }
+
             return Boom.notFound('column not found');
         });
 

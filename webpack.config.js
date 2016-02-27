@@ -4,7 +4,8 @@ var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('dep.js');
 module.exports = {
     entry: {
         app: './assets/js/app.js',
-        user_setting: './assets/js/user_setting.js'
+        user_setting: './assets/js/user_setting.js',
+        column: './assets/js/column.js'
     },
     output: {
         path: './assets/dist/js',

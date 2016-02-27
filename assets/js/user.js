@@ -28,6 +28,6 @@ module.exports.register = function(nick, password1, password2, email) {
 
 // 根据昵称获取用户信息
 module.exports.getByNick = function(nick) {
-    const url = `/api/users/nick/${nick}`;
+    const url = `/api/users/nick/${encodeURIComponent(nick)}`;
     return util.ajax('GET', url);
 };

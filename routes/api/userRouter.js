@@ -28,7 +28,7 @@ module.exports = function(router) {
 
         let url = API_SETTING('get_user_by_nick');
         const nick = this.params.nick;
-        url = url.replace('{nick}', nick);
+        url = url.replace('{nick}', encodeURIComponent(decodeURIComponent(nick)));
         this.body = yield request.getAsync(url).then(res => {
             return res.body;
         });
@@ -113,7 +113,7 @@ module.exports = function(router) {
                 password: md5(password1),
             }
         }).then(res => {
-            return res.body;
+            return JSON.parse(res.body);
         });
     });
 
