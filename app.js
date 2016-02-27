@@ -56,6 +56,7 @@ app.use(function *(next) {
 });
 
 function errorHandler(err, ctx) {
+    console.log(err);
     if (err.status === 404) {
         ctx.response.redirect('/404');
     } else if (err.status === 401) {

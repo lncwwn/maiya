@@ -19,10 +19,14 @@ module.exports = function(router) {
 
     // get posts list by column
     router.get('/posts/column/:id', function *() {
+
         const columnId = this.params.id;
         const url = API_SETTING('list_posts_by_column').replace('{id}', columnId);
         this.body = yield request.getAsync(url).then(res => {
-            return JSON.parse(res.body);
+            if (res && res.body) {
+                return JSON.parse(res.body);
+            }
+            return null;
         });
 
         return Boom.badRequest('parameter id must be a valid number');

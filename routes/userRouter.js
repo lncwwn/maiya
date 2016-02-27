@@ -109,16 +109,16 @@ module.exports = function(router) {
         const url = API_SETTING('get_column_by_user').replace('{id}', userId);
 
         this.body = yield request.getAsync(url).then(res => {
-            if (res) {
-                const column = JSON.parse(res.body);
+            let column = null;
+            if (res && res.body) {
+                column = JSON.parse(res.body);
                 if (column.active) {
                     column.lastModified = column.updated?column.updated:column.created;
                     column.lastModified = moment(column.lastModified).format('YYYY年MM月DD日');
                 }
-                return this.render('/users/column', {column: column});
             }
 
-            return Boom.notFound('column not found');
+            return this.render('/users/column', {column: column});
         });
 
     });
