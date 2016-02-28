@@ -24,7 +24,7 @@ function bindPosts(posts) {
     let container = document.createDocumentFragment();
     posts.forEach((post, index) => {
         const _template = template.clone();
-        _template.find('.title').text(post.title);
+        _template.find('.title').text(post.title).attr('href', `/posts/${post.id}`);
         container.appendChild(_template[0]);
     });
     $('#posts-list').append(container);
