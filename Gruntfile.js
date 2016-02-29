@@ -11,7 +11,8 @@ module.exports = function(grunt) {
                     'assets/dist/css/post.css': 'assets/less/post.less',
                     'assets/dist/css/login.css': 'assets/less/login.less',
                     'assets/dist/css/user_setting.css': 'assets/less/user_setting.less',
-                    'assets/dist/css/column.css': 'assets/less/column.less'
+                    'assets/dist/css/column.css': 'assets/less/column.less',
+                    'assets/dist/css/editor.css': 'assets/less/editor.less'
                 }
             }
         },

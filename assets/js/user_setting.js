@@ -35,7 +35,7 @@ const progressbar = $("#progressbar"),
                     if (data) {
                         data = JSON.parse(data);
                         if (data[0]) {
-                            $('#avatar-setting img').attr('src', APP_SETTING['qiniu']['url'] + '/' + fileName + '?imageView2/0/w/200/h/200');
+                            $('#avatar-setting img').attr('src', APP_SETTING['qiniu']['avatar_url'] + '/' + fileName + '?imageView2/0/w/200/h/200');
                             UIkit.notify({
                                 message: '<i class=\'uk-icon-check\'></i> 您的头像更换好了',
                                 status: 'success',

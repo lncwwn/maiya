@@ -1,21 +1,29 @@
 extends ./broad-layout.jade
 block css
-    link(rel="stylesheet" href="/bower_components/codemirror/lib/codemirror.css")
-    link(rel="stylesheet" href="/bower_components/uikit/css/components/htmleditor.min.css")
+    link(rel="stylesheet" href="/bower_components/uikit/css/components/upload.min.css")
+    link(rel="stylesheet" href="/bower_components/uikit/css/components/progress.min.css")
+    link(rel="stylesheet" href="/bower_components/wysiwyg.js/dist/wysiwyg-editor.min.css")
+    link(rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css")
+    link(rel="stylesheet" href="/assets/dist/css/editor.css")
 block body
-    form.art-edit.uk-form
-        fieldset
-            legend
-                span= "编辑文章"
-        .uk-grid.uk-grid-collapse
-            .uk-width-1-1.uk-form-controls-condensed
-                input.uk-width-1-1(type="text" placeholder="请输入文章标题")
-            .uk-width-1-1.uk-form-controls-condensed
-                textarea(data-uk-htmleditor="{markdown:true, mode:'split', lblPreview:'预览'}")
-            .uk-width-1-1.uk-form-controls-condensed
-                .uk-text-left
-                    button.uk-button.uk-button-primary= "发表文章"
+    .art-editor-layout
+        form.art-edit.uk-form
+            fieldset
+                legend
+                    span= "编辑文章"
+            .uk-grid.uk-grid-collapse
+                .uk-width-1-1.uk-form-controls-condensed
+                    input.uk-width-1-1(type="text" placeholder="请输入文章标题")
+                .uk-width-1-1.uk-form-controls-condensed
+                    textarea#editor.editor(name="content" placeholder="请在此处编写您的正文")
+                    input#actual-image-select.uk-hidden(type="file" name="image")
+                    #progressbar.uk-progress.uk-hidden
+                        .uk-progress-bar(style="width: 0%;")
+                .uk-width-1-1.uk-form-controls-condensed
+                    .uk-text-left
+                        button.uk-button.uk-button-primary#publish-btn= "发表文章"
 block js-load
-    script(src="/bower_components/codemirror/lib/codemirror.js")
-    script(src="/bower_components/marked/marked.min.js")
-    script(src="/bower_components/uikit/js/components/htmleditor.min.js")
+    script(src="/bower_components/uikit/js/components/upload.min.js")
+    script(src="/bower_components/wysiwyg.js/dist/wysiwyg.min.js")
+    script(src="/bower_components/wysiwyg.js/dist/wysiwyg-editor.min.js")
+    script(src="/assets/dist/js/editor.js")

@@ -10,16 +10,16 @@
 const util = require('./util');
 
 // load posts
-function loadPosts() {
+function fetchPosts() {
     const id = $('#column-id').val();
     const url = `/api/posts/column/${id}`;
     util.ajax('GET', url, {}).then(res => {
         console.log(res);
-        bindPosts(res.rows);
+        showPosts(res.rows);
     });
 };
 
-function bindPosts(posts) {
+function showPosts(posts) {
     if (!posts || !posts.length) {
         $('#posts-list').html('<div class="uk-alert uk-alert-warning">您的专栏还没有文章，现在<a href="/posts/edit">写一篇</a>吧</div>');
         return;
@@ -35,5 +35,5 @@ function bindPosts(posts) {
 };
 
 $(function() {
-    loadPosts();
+    fetchPosts();
 });

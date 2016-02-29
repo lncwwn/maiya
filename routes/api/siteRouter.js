@@ -52,7 +52,7 @@ module.exports = function(router) {
         }
 
         const bucket = APP_SETTING['qiniu']['bucket'][bucket_name];
-        const name = 'avatar_' + this.session.user.nick + '_' + new Date().getTime();
+        const name = bucket_name + '_' + this.session.user.nick + '_' + new Date().getTime();
         const file = this.request.body.files['files[]']['path'];
 
         const uptoken = upload.uptoken(bucket);

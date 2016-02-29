@@ -5,6 +5,7 @@ module.exports = {
     entry: {
         app: './assets/js/app.js',
         user_setting: './assets/js/user_setting.js',
+        editor: './assets/js/editor.js',
         column: './assets/js/column.js'
     },
     output: {
