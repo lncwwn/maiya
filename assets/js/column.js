@@ -20,6 +20,10 @@ function loadPosts() {
 };
 
 function bindPosts(posts) {
+    if (!posts || !posts.length) {
+        $('#posts-list').html('<div class="uk-alert uk-alert-warning">您的专栏还没有文章，现在<a href="/posts/edit">写一篇</a>吧</div>');
+        return;
+    }
     const template = $($("#posts-template").html());
     let container = document.createDocumentFragment();
     posts.forEach((post, index) => {
