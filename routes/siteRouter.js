@@ -29,7 +29,26 @@ module.exports = function(router) {
 
     // 专栏
     router.get('/site/column', function *() {
-        this.body = yield this.render('column');
+
+        const url = API_SETTING('list_columns');
+        this.body = yield request.getAsync(url).then(res => {
+            if (res && res.body) {
+                const columnsData = JSON.parse(res.body);
+                const columns = columnsData.rows;
+
+                for (let column of columns) {
+                    if (column.updated) {
+                        column.lastModified = moment(column.updated).format('YYYY-MM-DD');
+                    } else if (column.created) {
+                        column.lastModified = moment(column.created).format('YYYY-MM-DD');
+                    }
+                }
+                return this.render('column', {columns: columns});
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+
     });
 
     // 商店

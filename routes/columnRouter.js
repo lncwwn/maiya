@@ -20,7 +20,17 @@ const API_SETTING = require('../settings/api_setting');
 module.exports = function(router) {
 
     router.get('/columns', function *() {
-        //
+
+        const url = API_SETTING('list_columns');
+        this.body = yield request.getAsync(url).then(res => {
+            if (res && res.body) {
+                console.log(res.body);
+                return this.render('column', {columns: res.body});
+            }
+        }).catch(err => {
+            console.log(err);
+        });
+
     });
 
 }
