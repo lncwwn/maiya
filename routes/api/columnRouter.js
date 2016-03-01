@@ -17,9 +17,18 @@ const API_SETTING = require('../../settings/api_setting');
 
 module.exports = function(router) {
 
-    // 查看用户店铺信息
-    router.get('/columns/user/:id', function() {
-        //
+    /**
+     * 查看用户店铺信息
+     */
+    router.get('/columns/user/:id', function *() {
+
+        this.assert(this.session.user, 401, 'this operation need user login');
+
+        const url = API_SETTING('get_column_by_user').replace('{id}', this.session.user.id);
+        this.body = yield request.getAsync(url).then(res => {
+            return res.body;
+        });
+
     });
 
     // 开通店铺

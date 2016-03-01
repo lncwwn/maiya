@@ -63,6 +63,65 @@ const progressbar = $("#progressbar"),
 const select = UIkit.uploadSelect($("#actual-avatar-select"), settings);
 
 /**
+ * 加载用户店铺信息
+ */
+function fetchShop(userId) {
+    const url = `/api/shop/user/${userId}`;
+    util.ajax('GET', url, {}).done(res => {
+        if (!res) {
+            // do nothing
+            return;
+        }
+        res = JSON.parse(res);
+        if (res.active) {
+            $('#shop-setting input').val(res.name).prop('disabled', true);
+            $('#shop-setting button').prop('disabled', true);
+            $('#shop-setting-alert')
+                .removeClass('uk-hidden')
+                .find('.uk-alert')
+                .html('<i class=\'uk-icon-check\'></i> 您的店铺已经开通了');
+        }
+    }).fail(err => {
+        $('#shop-setting-alert')
+            .removeClass('uk-hidden')
+            .find('.uk-alert')
+            .removeClass('uk-alert-success')
+            .addClass('uk-alert-danger')
+            .html('<i class=\'uk-icon-times\'></i> 服务异常，查询店铺状态失败，请您稍后重试');
+    });
+};
+
+/**
+ * 加载用户专栏信息
+ */
+function fetchColumn(userId) {
+    const url = `/api/columns/user/${userId}`;
+    util.ajax('GET', url, {}).done(res => {
+        console.log(res);
+        if (!res) {
+            // do nothing
+            return;
+        }
+        res = JSON.parse(res);
+        if (res.active) {
+            $('#column-setting input').val(res.name).prop('disabled', true);
+            $('#column-setting button').prop('disabled', true);
+            $('#column-setting-alert')
+                .removeClass('uk-hidden')
+                .find('.uk-alert')
+                .html('<i class=\'uk-icon-check\'></i> 您的专栏已经开通了');
+        }
+    }).fail(err => {
+        $('#column-setting-alert')
+            .removeClass('uk-hidden')
+            .find('.uk-alert')
+            .removeClass('uk-alert-success')
+            .addClass('uk-alert-danger')
+            .html('<i class=\'uk-icon-times\'></i> 服务异常，查询店铺状态失败，请您稍后重试');
+    });
+};
+
+/**
  * 点击左侧菜单，在右侧显示对应的面板
  * @param panelName 菜单的名称
  */
@@ -117,7 +176,10 @@ function activeColumn(name) {
 }
 
 $(function() {
+    const userId = $('#user-id').val();
     matchCurrentPanel();
+    fetchShop(userId);
+    fetchColumn(userId);
 });
 
 $('body').on('click', '#shop-setting button', function(e) {
