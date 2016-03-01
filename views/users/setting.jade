@@ -14,36 +14,36 @@ block body
                     span 用户设置
             .art-user-setting.uk-grid
                 .uk-width-1-4
-                    .uk-panel.uk-panel-box.art-border
+                    .uk-panel.uk-panel-box.art-border#side-menu
                         .uk-nav-header.uk-text-primary
                             i.uk-icon-navicon
                             span &nbsp;资料设置
                         ul.uk-nav.uk-nav-side
-                            li.uk-active
+                            li.uk-active.menu-item
                                 a(href="#profile-setting") 个人资料
-                            li
+                            li.menu-item
                                 a(href="#password-setting") 修改密码
-                            li
+                            li.menu-item
                                 a(href="#avatar-setting") 修改头像
-                            li
+                            li.menu-item
                                 a(href="#email") 修改邮箱
                         .uk-nav-header.uk-text-primary
                             i.uk-icon-navicon
                             span &nbsp;专栏设置
                         ul.uk-nav.uk-nav-side
-                            li
+                            li.menu-item
                                 a(href="#column-setting") 专栏设置
-                            li
+                            li.menu-item
                                 a(href="#post") 文章管理
                         .uk-nav-header.uk-text-primary
                             i.uk-icon-navicon
                             span &nbsp;店铺设置
                         ul.uk-nav.uk-nav-side
-                            li
+                            li.menu-item
                                 a(href="#shop-setting") 店铺设置
                 .uk-width-3-4.uk-clearfix
                     .setting-area.uk-float-right
-                        #profile-setting
+                        #setting-panel
                             form.uk-form.uk-form-horizontal#profile-setting
                                 fieldset
                                     legend.uk-text-primary
@@ -65,7 +65,7 @@ block body
                                             input.uk-form-width-medium(type="text" name="birthday" data-uk-datepicker="{i18n:{months:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']},weekdays:['星期一','星期二','星期三','星期四','星期五','星期六','星期日']}")
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary 确认提交
-                            form.uk-form.uk-form-horizontal#password-setting
+                            form.uk-form.uk-form-horizontal.uk-hidden#password-setting
                                 fieldset
                                     legend.uk-text-primary
                                         i.uk-icon-lock &nbsp;修改密码
@@ -89,7 +89,7 @@ block body
                                             input.uk-form-width-medium(type="password" name="check_password")
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary 确认修改
-                            form.uk-form.uk-form-horizontal#avatar-setting
+                            form.uk-form.uk-form-horizontal.uk-hidden#avatar-setting
                                 fieldset
                                     legend.uk-text-primary
                                         i.uk-icon-image &nbsp;修改头像
@@ -104,7 +104,7 @@ block body
                                 #progressbar.uk-progress.uk-hidden
                                     .uk-progress-bar(style="width: 0%;")
                             br
-                            form.uk-form.uk-form-horizontal#shop-setting.uk-hidden
+                            form.uk-form.uk-form-horizontal.uk-hidden#shop-setting
                                 fieldset
                                     legend.uk-text-primary
                                         i.uk-icon-shopping-bag &nbsp;店铺设置
@@ -120,7 +120,7 @@ block body
                                 //        input(type="file")
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary#avtive-shop-button 开通店铺
-                            form.uk-form.uk-form-horizontal#column-setting
+                            form.uk-form.uk-form-horizontal.uk-hidden#column-setting
                                 fieldset
                                     legend.uk-text-primary
                                         i.uk-icon-shopping-bag &nbsp;专栏设置

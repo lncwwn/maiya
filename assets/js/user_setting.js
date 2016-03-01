@@ -63,6 +63,28 @@ const progressbar = $("#progressbar"),
 const select = UIkit.uploadSelect($("#actual-avatar-select"), settings);
 
 /**
+ * 点击左侧菜单，在右侧显示对应的面板
+ * @param panelName 菜单的名称
+ */
+function switchMenuPanel(panelName) {
+    panelName = panelName.replace('#', '');
+    $('#setting-panel>form').addClass('uk-hidden');
+    $(`#${panelName}`).removeClass('uk-hidden');
+};
+
+/**
+ * 根据hash匹配当前的菜单
+ *
+ */
+function matchCurrentPanel() {
+    const panelName = window.location.hash.replace('#', '');
+    $('#side-menu .menu-item').removeClass('uk-active');
+    $(`#side-menu .menu-item>a[href="#${panelName}"]`).parent().addClass('uk-active');
+    $(`#setting-panel>form`).addClass('uk-hidden');
+    $(`#setting-panel>form#${panelName}`).removeClass('uk-hidden');
+};
+
+/**
  * 激活店铺
  * @param name 店铺名称
  */
@@ -88,6 +110,10 @@ function activeColumn(name) {
     });
 }
 
+$(function() {
+    matchCurrentPanel();
+});
+
 $('body').on('click', '#shop-setting button', function(e) {
     e.preventDefault();
 }).on('click', '#avatar-select', function(e) {
@@ -100,4 +126,9 @@ $('body').on('click', '#shop-setting button', function(e) {
     e.preventDefault();
     const columnName = $('#column-setting input').val();
     activeColumn(columnName);
+}).on('click', '#side-menu .menu-item', function(e) {
+    const menuName = $(this).find('a').attr('href');
+    $('#side-menu .menu-item').removeClass('uk-active');
+    $(this).addClass('uk-active');
+    switchMenuPanel(menuName);
 });
