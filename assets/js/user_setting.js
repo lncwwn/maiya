@@ -175,6 +175,7 @@ function activeColumn(name) {
     });
 }
 
+// on document ready
 $(function() {
     const userId = $('#user-id').val();
     matchCurrentPanel();

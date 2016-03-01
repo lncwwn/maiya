@@ -33,6 +33,7 @@ const setting = {
     get_topic_by_user: "/topics/user/{id}",
     // column
     get_column_by_user: "/columns/user/{id}",
+    get_column_by_id: "/columns/id/{id}",
     list_columns: "/columns",
     active_column: "/columns/active"
 };

@@ -1,0 +1,25 @@
+extends ./broad-layout.jade
+block css
+    link(rel="stylesheet" href="/assets/dist/css/column.css")
+block body
+    .uk-grid.uk-grid-collapse
+        .uk-width-1-1
+            .uk-block.art-column-banner
+                .art-column-banner-main
+                    input#column-id(type="hidden" value=column.id)
+                    .uk-text-left
+                        h2= column.name
+                        p.uk-text-muted= "创建于" + column.created
+                .uk-block.art-column-body
+                    .art-column-body-main
+                        .uk-grid.uk-grid-collapse
+                            .uk-width-3-4
+                                #posts-list.posts-list
+                            .uk-width-1-4.uk-clearfix
+                                .column-right-panel.uk-float-right
+    script#posts-template(type="text/template")
+        .post
+            a.title(href="")
+
+block js-load
+    script(src="/assets/dist/js/column.js")

@@ -33,4 +33,17 @@ module.exports = function(router) {
 
     });
 
+    router.get('/columns/:id', function *() {
+
+        const url = API_SETTING('get_column_by_id').replace('{id}', this.params.id);
+        this.body = yield request.getAsync(url).then(res => {
+            if (!res || !res.body) {
+                return this.redirect('/404');
+            }
+            const column = JSON.parse(res.body);
+            return this.render('column_detail', {column: column});
+        });
+
+    });
+
 }
