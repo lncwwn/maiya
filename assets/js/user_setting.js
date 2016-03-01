@@ -67,6 +67,9 @@ const select = UIkit.uploadSelect($("#actual-avatar-select"), settings);
  * @param panelName 菜单的名称
  */
 function switchMenuPanel(panelName) {
+    if (!panelName) {
+        return;
+    }
     panelName = panelName.replace('#', '');
     $('#setting-panel>form').addClass('uk-hidden');
     $(`#${panelName}`).removeClass('uk-hidden');
@@ -78,6 +81,9 @@ function switchMenuPanel(panelName) {
  */
 function matchCurrentPanel() {
     const panelName = window.location.hash.replace('#', '');
+    if (!panelName) {
+        return;
+    }
     $('#side-menu .menu-item').removeClass('uk-active');
     $(`#side-menu .menu-item>a[href="#${panelName}"]`).parent().addClass('uk-active');
     $(`#setting-panel>form`).addClass('uk-hidden');
