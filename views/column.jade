@@ -4,13 +4,19 @@ block css
 block body
     .uk-grid.uk-grid-collapse
         .uk-width-3-4
+            h3 专栏
+            hr
             .uk-grid.uk-grid-collapse
                 each column in columns
                     .uk-width-1-3
                         .column
-                            a(href="/")= column.name
+                            a(href="/columns/" + column.id)= column.name
                             .column-caption
-                                p= column.lastModified
+                                .uk-grid
+                                    .uk-width-1-2
+                                        span= column.lastModified
+                                    .uk-width-1-2
+                                        i.uk-icon-heart-o= " " + column.star
 
 
         .uk-width-1-4.uk-clearfix
