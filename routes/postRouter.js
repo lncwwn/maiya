@@ -52,7 +52,11 @@ module.exports = function(router) {
 
     // 文章编辑页面
     router.get('/posts/edit', function *() {
+
+        this.assert(this.session.user, 401, 'this operation need user login');
+
         this.body = yield this.render('edit');
+
     });
 
 };

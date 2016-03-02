@@ -71,6 +71,9 @@ function errorHandler(err, ctx) {
 app.use(function *(next) {
     try {
         yield next;
+        if (this.response.status === 404) {
+            this.response.redirect('/404');
+        }
     } catch(err) {
         errorHandler(err, this);
     }
