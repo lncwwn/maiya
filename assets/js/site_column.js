@@ -8,10 +8,19 @@
 'use strict';
 
 const _column = require('./_column');
+const moment = require('moment');
 
 $(document).ready(function() {
+
     _column.fetchPosts().done(res => {
-        console.log(res);
+        const posts = res.rows;
+        posts.forEach(post => {
+            post.lastModified = moment(post.created).format('YYYY年MM月DD日');
+            if (post.updated) {
+                post.lastModified = moment(post.updated).format('YYYY年MM月DD日');
+            }
+        });
         _column.showPosts(res.rows, false);
     });
+
 });

@@ -31,6 +31,8 @@ module.exports.showPosts = function(posts, isCurrentUser) {
     posts.forEach((post, index) => {
         const _template = template.clone();
         _template.find('.title').text(post.title).attr('href', `/posts/${post.id}`);
+        _template.find('.date').text(post.lastModified);
+        _template.find('.star').text(post.star);
         container.appendChild(_template[0]);
     });
     $('#posts-list').append(container);

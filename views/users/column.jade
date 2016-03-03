@@ -24,8 +24,16 @@ block body
                             .uk-width-1-4.uk-clearfix
                                 .column-right-panel.uk-float-right
     script#posts-template(type="text/template")
-        .post
-            a.title(href="")
+        .uk-grid.uk-grid-collapse.post
+            .uk-width-4-6
+                a.title(href="")
+            .uk-width-1-6
+                span.date
+            .uk-width-1-6
+                .uk-text-right
+                    i.uk-icon-heart-o
+                    span &nbsp;
+                    span.star
 
 block js-load
     script(src="/assets/dist/js/user_column.js")

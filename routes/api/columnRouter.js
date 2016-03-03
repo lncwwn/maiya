@@ -18,7 +18,7 @@ const API_SETTING = require('../../settings/api_setting');
 module.exports = function(router) {
 
     /**
-     * 查看用户店铺信息
+     * 查看用户专栏信息
      */
     router.get('/columns/user/:id', function *() {
 
@@ -31,7 +31,7 @@ module.exports = function(router) {
 
     });
 
-    // 开通店铺
+    // 开通专栏
     router.post('/columns/active', function *() {
 
         if (!this.session.user) {
