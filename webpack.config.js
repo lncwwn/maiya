@@ -6,7 +6,8 @@ module.exports = {
         app: './assets/js/app.js',
         user_setting: './assets/js/user_setting.js',
         editor: './assets/js/editor.js',
-        column: './assets/js/column.js'
+        user_column: './assets/js/user_column.js',
+        site_column: './assets/js/site_column.js'
     },
     output: {
         path: './assets/dist/js',

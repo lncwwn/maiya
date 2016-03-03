@@ -41,6 +41,7 @@ module.exports = function(router) {
                 return this.redirect('/404');
             }
             const column = JSON.parse(res.body);
+            column.created = moment(column.created).format('YYYY年MM月DD日');
             return this.render('column_detail', {column: column});
         });
 

@@ -10,18 +10,20 @@
 const util = require('./util');
 
 // load posts
-function fetchPosts() {
+module.exports.fetchPosts = function() {
     const id = $('#column-id').val();
     const url = `/api/posts/column/${id}`;
-    util.ajax('GET', url, {}).then(res => {
-        console.log(res);
-        showPosts(res.rows);
-    });
+    return util.ajax('GET', url, {});
 };
 
-function showPosts(posts) {
+// render posts on page
+module.exports.showPosts = function(posts, isCurrentUser) {
+    let noContentTip = '<div class="uk-alert uk-alert-warning">该专栏下还没有文章</div>';
+    if (isCurrentUser) {
+        noContentTip = '<div class="uk-alert uk-alert-warning">您的专栏还没有文章，现在<a href="/posts/edit">写一篇</a>吧</div>';
+    }
     if (!posts || !posts.length) {
-        $('#posts-list').html('<div class="uk-alert uk-alert-warning">您的专栏还没有文章，现在<a href="/posts/edit">写一篇</a>吧</div>');
+        $('#posts-list').html(noContentTip);
         return;
     }
     const template = $($("#posts-template").html());
@@ -34,6 +36,3 @@ function showPosts(posts) {
     $('#posts-list').append(container);
 };
 
-$(function() {
-    fetchPosts();
-});
