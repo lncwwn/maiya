@@ -18,7 +18,7 @@ const API_SETTING = require('../settings/api_setting');
 module.exports = function(router) {
 
     // 加载首页，文章列表页
-    router.get('/', function *() {
+    router.get('/posts', function *() {
 
         this.body = yield request.getAsync(API_SETTING('list_posts')).then(res => {
             const body = JSON.parse(res.body);

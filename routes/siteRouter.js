@@ -17,6 +17,16 @@ const API_SETTING = require('../settings/api_setting');
 
 module.exports = function(router) {
 
+    // index page
+    router.get('/', function *() {
+        this.response.redirect('/posts');
+    });
+
+    // index page
+    router.get('/site/post', function *() {
+        this.response.redirect('/posts');
+    });
+
     // 问答
     router.get('/site/qa', function *() {
         this.body = yield this.render('qa');
