@@ -7,19 +7,20 @@ block body
             .uk-block.art-shop-banner
                 .art-shop-banner-main
                     if (!shop || !shop.shop_active)
-                        .uk-alert.uk-alert-warning 您的店铺尚未开通，无法查看店铺信息
-                        a.uk-button.uk-button-large.uk-button-primary(type="button" href="/users/setting#shop-setting") 开通店铺
+                        .uk-text-left
+                            span 您的店铺尚未开通，无法查看店铺信息
+                            a.uk-button.uk-button-large.uk-button-success(type="button" href="/users/setting#shop-setting") 开通店铺
                     else
                         input#shop-id(type="hidden" value=shop.id)
                         .uk-text-left
                             h2= shop.name
                             p.uk-text-muted= "创建于" + shop.created
-                    if (shop && shop.shop_active)
-                        .uk-block.uk-shop-body
-                            .art-shop-body-main
-                                .uk-grid.uk-grid-collapse
-                                    .uk-width-3-4
-                                        #goods-list.goods-list
-                                    .uk-width-1-4
+            if (shop && shop.shop_active)
+                .uk-block.art-shop-body
+                    .art-shop-body-main
+                        .uk-grid.uk-grid-collapse
+                            .uk-width-3-4
+                                #goods-list.goods-list
+                            .uk-width-1-4
 block js-load
     script(src="/assets/dist/js/user_shop.js")

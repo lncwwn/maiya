@@ -10,9 +10,14 @@
 const _shop = require('./_shop');
 
 $(function() {
+
     const shopId = $('#shop-id').val();
     _shop.fetchGoods(shopId).done(res => {
-        console.log(res);
+        if (res) {
+            const goods = res.rows;
+            _shop.showGoods(goods);
+        }
     });
+
 });
 

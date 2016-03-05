@@ -15,5 +15,8 @@ module.exports.fetchGoods = function(shopId) {
 };
 
 module.exports.showGoods = function(goods) {
-    console.log(goods);
+    if (!goods || !goods.length) {
+        const tip = '<div class="uk-alert uk-alert-warning">您的店铺还没有上架商品，现在去<a href="/users/setting#goods-setting">添加一些商品</a>吧</div>';
+        $('#goods-list').html(tip);
+    }
 };

@@ -33,7 +33,10 @@ module.exports = function(router) {
         const shopId = this.params.id;
         const url = API_SETTING('list_goods_by_shop').replace('{id}', shopId);
         this.body = yield request.getAsync(url).then(res => {
-            return res.body;
+            if (res && res.body) {
+                return JSON.parse(res.body);
+            }
+            return null;
         });
 
     });
