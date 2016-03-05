@@ -30,10 +30,12 @@ const userRouter = require('./routes/userRouter');
 const postRouter = require('./routes/postRouter');
 const shopRouter = require('./routes/shopRouter');
 const columnRouter = require('./routes/columnRouter');
+//const goodsRouter = require('./routes/columnRouter');
 const userApiRouter = require('./routes/api/userRouter');
 const postApiRouter = require('./routes/api/postRouter');
 const shopApiRouter = require('./routes/api/shopRouter');
 const columnApiRouter = require('./routes/api/columnRouter');
+const goodsApiRouter = require('./routes/api/goodsRouter');
 
 
 app.name = 'maiya';
@@ -91,10 +93,12 @@ userRouter(CommonRouter);
 postRouter(CommonRouter);
 shopRouter(CommonRouter);
 columnRouter(CommonRouter);
+//goodsRouter(CommonRouter);
 userApiRouter(ApiRouter);
 postApiRouter(ApiRouter);
 shopApiRouter(ApiRouter);
 columnApiRouter(ApiRouter);
+goodsApiRouter(ApiRouter);
 
 app.use(staticServe({rootDir: __dirname + '/assets', rootPath: '/assets'}));
 app.use(staticServe({rootDir: __dirname + '/bower_components', rootPath: '/bower_components'}));

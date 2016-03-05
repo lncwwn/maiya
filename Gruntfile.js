@@ -12,6 +12,7 @@ module.exports = function(grunt) {
                     'assets/dist/css/login.css': 'assets/less/login.less',
                     'assets/dist/css/user_setting.css': 'assets/less/user_setting.less',
                     'assets/dist/css/column.css': 'assets/less/column.less',
+                    'assets/dist/css/shop.css': 'assets/less/shop.less',
                     'assets/dist/css/editor.css': 'assets/less/editor.less',
                     'assets/dist/css/site_column.css': 'assets/less/site_column.less'
                 }

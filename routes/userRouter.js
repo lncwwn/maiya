@@ -67,21 +67,22 @@ module.exports = function(router) {
         const url = API_SETTING('get_shop_by_user').replace('{id}', userId);
         this.body = yield request.getAsync(url).then(res => {
             const _data = JSON.parse(res.body);
-            let data = {};
+            let shop = {};
             if (_data.statusCode === 404) {
-                data.shop_active = false;
+                shop.shop_active = false;
             } else if (_data.id || _data.name) {
                 // 店铺有id和name属性
-                data.shop_active = false;
+                shop.shop_active = false;
                 if (_data.active) {
-                    data.shop_active = true;
+                    shop.shop_active = true;
+                    _data.created = moment(_data.created).format('YYYY年MM月DD日');
                     if (_data.user && _data.user.avatar) {
                         _data.user.avatar = APP_SETTING['qiniu']['url'] + '/' + _data.user.avatar;
                     }
-                    data = _.extend(data, _data);
+                    shop = _.extend(shop, _data);
                 }
             }
-            return this.render('users/shop', {data: data});
+            return this.render('users/shop', {shop: shop});
         });
 
     });
