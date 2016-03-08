@@ -138,6 +138,39 @@ block body
                                             input.uk-form-width-medium(type="text" name="column_name")
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary#active-column-button 开通专栏
+                            form.uk-form.uk-form-horizontal.uk-hidden#goods-setting
+                                fieldset
+                                    legend.uk-text-primary
+                                        i.uk-icon-goods-bag &nbsp;上传商品
+                                .uk-form-row.uk-hidden#goods-setting-alert
+                                    .uk-alert.uk-alert-success
+                                .uk-form-row
+                                    label.uk-form-label 商品名称
+                                    .uk-form-controls
+                                        .uk-form-icon
+                                            i.uk-icon-registered
+                                            input.uk-form-width-medium(type="text" name="goods_name")
+                                .uk-form-row
+                                    label.uk-form-label 商品价格
+                                    .uk-form-controls
+                                        .uk-form-icon
+                                            i.uk-icon-cny
+                                            input.uk-form-width-medium(type="text" name="goods_price")
+                                .uk-form-row
+                                    label.uk-form-label 商品库存
+                                    .uk-form-controls
+                                        .uk-form-icon
+                                            i.uk-icon-shopping-basket
+                                            input.uk-form-width-medium(type="text" name="goods_inventory")
+                                .uk-form-row
+                                    label.uk-form-label 实物图片
+                                        span.uk-text-danger (限三张)
+                                    .uk-form-controls
+                                        a.uk-thumbnail(href="javascript:;")
+                                            img.goods-img(src="/assets/img/fruit_default.jpg" alt="默认图片" data-default="1")
+                                            .uk-thumbnail-caption 点击上传
+                                .uk-form-row.uk-text-right
+                                    button.uk-button.uk-button-primary#active-goods-button 确认上传
     input#user-id(type="hidden" value=user.id)
 
 block js-load
