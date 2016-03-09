@@ -150,18 +150,21 @@ block body
                                         .uk-form-icon
                                             i.uk-icon-registered
                                             input.uk-form-width-medium(type="text" name="goods_name")
+                                        .uk-hidden.uk-alert.uk-alert-danger.name-error
                                 .uk-form-row
                                     label.uk-form-label 商品价格
                                     .uk-form-controls
                                         .uk-form-icon
                                             i.uk-icon-cny
                                             input.uk-form-width-medium(type="text" name="goods_price")
+                                        .uk-hidden.uk-alert.uk-alert-danger.price-error
                                 .uk-form-row
                                     label.uk-form-label 商品库存
                                     .uk-form-controls
                                         .uk-form-icon
                                             i.uk-icon-shopping-basket
                                             input.uk-form-width-medium(type="text" name="goods_inventory")
+                                        .uk-hidden.uk-alert.uk-alert-danger.inventory-error
                                 .uk-form-row
                                     label.uk-form-label 商品描述
                                     .uk-form-controls
@@ -170,6 +173,7 @@ block body
                                     label.uk-form-label 实物图片
                                         span.uk-text-danger (限三张)
                                     .uk-form-controls
+                                        .uk-hidden.uk-alert.uk-alert-danger.photos-error
                                         #goods-image-preview.uk-hidden
                                         input#actual-goods-image-upload.uk-hidden(type="file" name="goods-img")
                                         a#upload-goods-img.uk-thumbnail(href="javascript:;")

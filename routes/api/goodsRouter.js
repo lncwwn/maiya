@@ -41,4 +41,21 @@ module.exports = function(router) {
 
     });
 
+    // add new goods
+    router.post('/goods/add', function *() {
+
+        const name = this.request.body.name;
+        const price = this.request.body.price;
+        const inventory = this.request.body.inventory;
+        const description = this.request.body.description;
+        const photos = this.request.body.photos;
+        const shop = this.request.body.shop;
+        const url = API_SETTING('new_goods');
+
+        this.body = yield request.postAsync(url).then(res => {
+            console.log(res);
+        });
+
+    });
+
 };

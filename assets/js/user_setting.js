@@ -119,6 +119,7 @@ function fetchShop(userId) {
                 .removeClass('uk-hidden')
                 .find('.uk-alert')
                 .html('<i class=\'uk-icon-check\'></i> 您的店铺已经开通了');
+            $('body').append(`<input id="shop-id" type="hidden" value="${res.id}">`);
         }
     }).fail(err => {
         $('#shop-setting-alert')
@@ -148,6 +149,7 @@ function fetchColumn(userId) {
                 .removeClass('uk-hidden')
                 .find('.uk-alert')
                 .html('<i class=\'uk-icon-check\'></i> 您的专栏已经开通了');
+            $('body').append(`<input id="column-id" type="hidden" value="${res.id}">`);
         }
     }).fail(err => {
         $('#column-setting-alert')
@@ -250,6 +252,9 @@ function activeColumn(name) {
     });
 };
 
+/**
+ * 从服务器删除商品照片
+ */
 function deleteGoodsPhoto(fileName) {
     const bucketName = 'goods';
     util.ajax('POST', '/api/site/file', {bucket_name: bucketName, file_name: fileName}).done(function(data) {
@@ -263,6 +268,9 @@ function deleteGoodsPhoto(fileName) {
     });
 };
 
+/**
+ * 从本地删除商品照片记录
+ */
 function deleteGoodsPhotoFromLocalStorage(fileName) {
     let photos = localStorage.getItem('goods-photos');
     if (photos) {
@@ -270,6 +278,78 @@ function deleteGoodsPhotoFromLocalStorage(fileName) {
         const index = photos.indexOf(fileName);
         photos.splice(index, 1);
         localStorage.setItem('goods-photos', JSON.stringify(photos));
+    }
+};
+
+/**
+ * 添加商品
+ */
+function addGoods() {
+    const name = $.trim($('#goods-setting input[name="goods_name"]').val());
+    const price = $.trim($('#goods-setting input[name="goods_price"]').val());
+    const inventory = $.trim($('#goods-setting input[name="goods_inventory"]').val());
+    const description = $.trim($('#goods-setting textarea[name="goods_des"]').val());
+    const photos = localStorage.getItem('goods-photos');
+    const shop = $('#shop-id').val();
+    const params = {
+        name: name,
+        price: price,
+        inventory: inventory,
+        description: description,
+        photos: photos,
+        shop: shop
+    };
+    if (validateGoodsParams(params)) {
+        const url = '/api/goods/add';
+        util.ajax('POST', url, {
+            name: name,
+            price: price,
+            inventory: inventory,
+            description: description,
+            photos: photos,
+            shop: shop
+        }).done(function(res) {
+            console.log(res);
+        }).fail(function(err) {
+            console.log(err);
+        });
+    }
+};
+
+/**
+ * 验证商品参数信息
+ */
+function validateGoodsParams(params) {
+    if (!params.name) {
+        $('#goods-setting .name-error').text('请填写商品名称').removeClass('uk-hidden');
+        return;
+    } else {
+        $('#goods-setting .name-error').addClass('uk-hidden');
+    }
+    if (params.price == '' || params.price < 0) {
+        $('#goods-setting .price-error').text('请填写正确的商品价格').removeClass('uk-hidden');
+        return;
+    } else {
+        $('#goods-setting .price-error').addClass('uk-hidden');
+    }
+    if (params.inventory == '' || params.price < 0) {
+        $('#goods-setting .inventory-error').text('请填写商品名称').removeClass('uk-hidden');
+        return;
+    } else {
+        $('#goods-setting .inventory-error').addClass('uk-hidden');
+    }
+    if (!params.photos) {
+        $('#goods-setting .photos-error').text('请务必上传三张商品照片').removeClass('uk-hidden');
+        return;
+    } else {
+        const photos = JSON.parse(params.photos);
+        if (photos.length < 3) {
+            const missing = 3 - photos.length;
+            $('#goods-setting .photos-error').text(`请务必上传三张商品照片，您还需要上传${missing}张`).removeClass('uk-hidden');
+            return;
+        } else {
+            $('#goods-setting .photos-error').addClass('uk-hidden');
+        }
     }
 };
 
@@ -304,4 +384,7 @@ $('body').on('click', '#shop-setting button', function(e) {
 }).on('click', '#goods-image-preview .delete-photo', function(e) {
     const id = $(this).attr('id');
     deleteGoodsPhoto(id);
+}).on('click', '#add-goods-button', function(e) {
+    e.preventDefault();
+    addGoods();
 });

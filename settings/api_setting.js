@@ -39,7 +39,8 @@ const setting = {
     // goods
     list_goods: "/goods",
     list_goods_by_shop: "/goods/shop/{id}",
-    get_goods_by_id: "/goods/id/{id}"
+    get_goods_by_id: "/goods/id/{id}",
+    new_goods: "/goods/new"
 };
 
 function apiPath(pathPart) {
