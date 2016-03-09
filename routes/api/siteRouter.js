@@ -66,4 +66,34 @@ module.exports = function(router) {
         });
     });
 
+    /**
+     * 删除qiniu资源
+     */
+    router.post('/site/file', function *() {
+
+        const bucketName = this.request.body.bucket_name;
+        const fileName = this.request.body.file_name;
+        if (!bucketName) {
+            this.body = Boom.badRequest('bucket name cannot be empty');
+            return;
+        }
+        if (!fileName) {
+            this.body = Boom.badRequest('file name cannot be empty');
+            return;
+        }
+
+        const bucket = APP_SETTING['qiniu']['bucket'][bucketName];
+        const uptoken = upload.uptoken(bucket);
+        this.body = yield upload.remove(uptoken, bucket, fileName).then(res => {
+            if (res == null) {
+                return {
+                    removed: true
+                };
+            }
+        }).catch(err => {
+            return Boom.wrap(new Error(err.error), err.code, err.error);
+        });
+
+    });
+
 };

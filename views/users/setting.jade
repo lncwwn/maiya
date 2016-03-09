@@ -42,7 +42,7 @@ block body
                             li.menu-item
                                 a(href="#shop-setting") 开通店铺
                             li.menu-item
-                                a(href="#goods-setting") 上传商品
+                                a(href="#goods-setting") 添加商品
                 .uk-width-3-4.uk-clearfix
                     .setting-area.uk-float-right
                         #setting-panel
@@ -166,11 +166,13 @@ block body
                                     label.uk-form-label 实物图片
                                         span.uk-text-danger (限三张)
                                     .uk-form-controls
-                                        a.uk-thumbnail(href="javascript:;")
+                                        #goods-image-preview.uk-hidden
+                                        input#actual-goods-image-upload.uk-hidden(type="file" name="goods-img")
+                                        a#upload-goods-img.uk-thumbnail(href="javascript:;")
                                             img.goods-img(src="/assets/img/fruit_default.jpg" alt="默认图片" data-default="1")
                                             .uk-thumbnail-caption 点击上传
                                 .uk-form-row.uk-text-right
-                                    button.uk-button.uk-button-primary#active-goods-button 确认上传
+                                    button.uk-button.uk-button-primary#add-goods-button 确认添加
     input#user-id(type="hidden" value=user.id)
 
 block js-load

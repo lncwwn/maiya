@@ -35,3 +35,13 @@ module.exports.upload = function(uptoken, key, body) {
     return qiniu.io.putFileAsync(uptoken, key, body, extra);
 
 };
+
+/**
+ * 删除文件
+ */
+module.exports.remove = function(uptoken, bucket, key) {
+
+    const client = Promise.promisifyAll(new qiniu.rs.Client());
+    return client.removeAsync(bucket, key);
+
+}

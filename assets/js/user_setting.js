@@ -11,56 +11,94 @@ const APP_SETTING = require('./app_setting');
 const util = require('./util');
 
 const progressbar = $("#progressbar"),
-    bar = progressbar.find('.uk-progress-bar'),
-    settings = {
-        action: '/api/site/upload',
-        params: {bucket_name: 'avatar'},
-        allow : '*.(jpg|jpeg|gif|png)',
-        loadstart: function() {
-            bar.css("width", "0%").text("0%");
-            progressbar.removeClass("uk-hidden");
-        },
-        progress: function(percent) {
-            percent = Math.ceil(percent);
-            bar.css("width", percent+"%").text(percent+"%");
-        },
-        allcomplete: function(response) {
-            if (response)
-                response = JSON.parse(response);
-            if (response.upload) {
-                const userId = $('#user-id').val();
-                const url = `/api/users/${userId}`;
-                const fileName = response.name;
-                util.ajax('POST', url, {avatar: response.name}).done(function(data) {
-                    if (data) {
-                        data = JSON.parse(data);
-                        if (data[0]) {
-                            $('#avatar-setting img').attr('src', APP_SETTING['qiniu']['avatar_url'] + '/' + fileName + '?imageView2/0/w/200/h/200');
-                            UIkit.notify({
-                                message: '<i class=\'uk-icon-check\'></i> 您的头像更换好了',
-                                status: 'success',
-                                timeout: 3000,
-                                pos: 'top-center'
-                            });
-                        }
-                    }
-                }).fail(function(err) {
-                    UIkit.notify({
-                        message: '<i class=\'uk-icon-times\'></i> 您的头像更换出了点小问题，重新来一次吧',
-                        status: 'danger',
-                        timeout: 3000,
-                        pos: 'top-center'
-                    });
-                });
-            }
-            bar.css("width", "100%").text("100%");
-            setTimeout(function(){
-                progressbar.addClass("uk-hidden");
-            }, 250);
-        }
-    };
+    bar = progressbar.find('.uk-progress-bar');
 
-const select = UIkit.uploadSelect($("#actual-avatar-select"), settings);
+// 上传头像设置
+let avatarSettings = {
+    action: '/api/site/upload',
+    params: {bucket_name: 'avatar'},
+    allow : '*.(jpg|jpeg|gif|png)',
+    loadstart: function() {
+        bar.css("width", "0%").text("0%");
+        progressbar.removeClass("uk-hidden");
+    },
+    progress: function(percent) {
+        percent = Math.ceil(percent);
+        bar.css("width", percent+"%").text(percent+"%");
+    },
+    allcomplete: function(response) {
+        if (response)
+            response = JSON.parse(response);
+        if (response.upload) {
+            const userId = $('#user-id').val();
+            const url = `/api/users/${userId}`;
+            const fileName = response.name;
+            util.ajax('POST', url, {avatar: response.name}).done(function(data) {
+                if (data) {
+                    data = JSON.parse(data);
+                    if (data[0]) {
+                        $('#avatar-setting img').attr('src', `${APP_SETTING['qiniu']['avatar_url']}/${fileName}?imageView2/0/w/200/h/200`);
+                        UIkit.notify({
+                            message: '<i class=\'uk-icon-check\'></i> 您的头像更换好了',
+                            status: 'success',
+                            timeout: 3000,
+                            pos: 'top-center'
+                        });
+                    }
+                }
+            }).fail(function(err) {
+                UIkit.notify({
+                    message: '<i class=\'uk-icon-times\'></i> 您的头像更换出了点小问题，重新来一次吧',
+                    status: 'danger',
+                    timeout: 3000,
+                    pos: 'top-center'
+                });
+            });
+        }
+        bar.css("width", "100%").text("100%");
+        setTimeout(function(){
+            progressbar.addClass("uk-hidden");
+        }, 250);
+    }
+};
+
+// 上传商品图片设置
+let goodsImageSettings = {
+    action: '/api/site/upload',
+    params: {bucket_name: 'goods'},
+    allow : '*.(jpg|jpeg|gif|png)',
+    loadstart: function() {
+        bar.css("width", "0%").text("0%");
+        progressbar.removeClass("uk-hidden");
+    },
+    progress: function(percent) {
+        percent = Math.ceil(percent);
+        bar.css("width", percent+"%").text(percent+"%");
+    },
+    allcomplete: function(response) {
+        if (response)
+            response = JSON.parse(response);
+        if (response.upload) {
+            const fileName = response.name;
+            appendPhoto(fileName);
+            let goodsPhotos = localStorage.getItem('goods-photos');
+            if (goodsPhotos) {
+                goodsPhotos = JSON.parse(goodsPhotos);
+            } else {
+                goodsPhotos = [];
+            }
+            goodsPhotos.push(fileName);
+            localStorage.setItem('goods-photos', JSON.stringify(goodsPhotos));
+        }
+        bar.css("width", "100%").text("100%");
+        setTimeout(function(){
+            progressbar.addClass("uk-hidden");
+        }, 250);
+    }
+};
+
+const select = UIkit.uploadSelect($("#actual-avatar-select"), avatarSettings);
+const goodsImageSelect = UIkit.uploadSelect($("#actual-goods-image-upload"), goodsImageSettings);
 
 /**
  * 加载用户店铺信息
@@ -97,7 +135,6 @@ function fetchShop(userId) {
 function fetchColumn(userId) {
     const url = `/api/columns/user/${userId}`;
     util.ajax('GET', url, {}).done(res => {
-        console.log(res);
         if (!res) {
             // do nothing
             return;
@@ -150,6 +187,43 @@ function matchCurrentPanel() {
 };
 
 /**
+ * 从本地缓存中加载未上传的商品照片
+ */
+function loadGoodsPhotosFromLocalStorage() {
+    let photos = localStorage.getItem('goods-photos');
+    if (photos) {
+        photos = JSON.parse(photos);
+        initPreviewArea();
+        let photosPreviewStr = '';
+        for (let photo of photos) {
+            appendPhoto(photo);
+        }
+        $('#goods-image-preview').removeClass('uk-hidden');
+        limitPhotosCount(photos.length);
+    }
+};
+
+function initPreviewArea() {
+    $('#goods-image-preview').html('<div class="uk-grid" data-uk-grid-margin></div>');
+};
+
+function appendPhoto(photo) {
+    let photosPreviewStr = '<div class="uk-width-1-2 preview-item">'
+                            + '<div class="uk-thumbnail">'
+                            + `<img src="${APP_SETTING['qiniu']['goods_url']}/${photo}" />`
+                            + '<div class="uk-thumbnail-caption">'
+                            + `<a href="javascript:;" class="delete-photo" id="${photo}"><i class="uk-icon-trash"></i> 删除</a>`
+                            + '</div></div></div>';
+    $('#goods-image-preview>.uk-grid').append($(photosPreviewStr));
+};
+
+function limitPhotosCount(count) {
+    if (count >= 3) {
+        $('#upload-goods-img').addClass('uk-hidden');
+    }
+};
+
+/**
  * 激活店铺
  * @param name 店铺名称
  */
@@ -160,7 +234,7 @@ function activeShop(name) {
     }).fail(function(err) {
         console.log(err);
     });
-}
+};
 
 /**
  * 激活专栏
@@ -173,7 +247,29 @@ function activeColumn(name) {
     }).fail(function(err) {
         console.log(err);
     });
-}
+};
+
+function deleteGoodsPhoto(fileName) {
+    const bucketName = 'goods';
+    util.ajax('POST', '/api/site/file', {bucket_name: bucketName, file_name: fileName}).done(function(data) {
+        if (data && data.removed) {
+            $(`#${fileName}`).closest('.preview-item').remove();
+            deleteGoodsPhotoFromLocalStorage(fileName);
+        }
+    }).fail(function(err) {
+        console.log(err);
+    });
+};
+
+function deleteGoodsPhotoFromLocalStorage(fileName) {
+    let photos = localStorage.getItem('goods-photos');
+    if (photos) {
+        photos = JSON.parse(photos);
+        const index = photos.indexOf(fileName);
+        photos.splice(index, 1);
+        localStorage.setItem('goods-photos', JSON.stringify(photos));
+    }
+};
 
 // on document ready
 $(function() {
@@ -181,6 +277,7 @@ $(function() {
     matchCurrentPanel();
     fetchShop(userId);
     fetchColumn(userId);
+    loadGoodsPhotosFromLocalStorage();
 });
 
 $('body').on('click', '#shop-setting button', function(e) {
@@ -200,4 +297,10 @@ $('body').on('click', '#shop-setting button', function(e) {
     $('#side-menu .menu-item').removeClass('uk-active');
     $(this).addClass('uk-active');
     switchMenuPanel(menuName);
+}).on('click', '#upload-goods-img', function(e) {
+    $('#actual-goods-image-upload').click();
+}).on('click', '#goods-image-preview .delete-photo', function(e) {
+    const id = $(this).attr('id');
+    console.log(id);
+    deleteGoodsPhoto(id);
 });
