@@ -163,6 +163,10 @@ block body
                                             i.uk-icon-shopping-basket
                                             input.uk-form-width-medium(type="text" name="goods_inventory")
                                 .uk-form-row
+                                    label.uk-form-label 商品描述
+                                    .uk-form-controls
+                                        textarea(name="goods_des")
+                                .uk-form-row
                                     label.uk-form-label 实物图片
                                         span.uk-text-danger (限三张)
                                     .uk-form-controls
@@ -170,7 +174,7 @@ block body
                                         input#actual-goods-image-upload.uk-hidden(type="file" name="goods-img")
                                         a#upload-goods-img.uk-thumbnail(href="javascript:;")
                                             img.goods-img(src="/assets/img/fruit_default.jpg" alt="默认图片" data-default="1")
-                                            .uk-thumbnail-caption 点击上传
+                                            .uk-thumbnail-caption 选择图片上传
                                 .uk-form-row.uk-text-right
                                     button.uk-button.uk-button-primary#add-goods-button 确认添加
     input#user-id(type="hidden" value=user.id)

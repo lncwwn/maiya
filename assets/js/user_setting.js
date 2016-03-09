@@ -88,6 +88,7 @@ let goodsImageSettings = {
                 goodsPhotos = [];
             }
             goodsPhotos.push(fileName);
+            limitPhotosCount(goodsPhotos.length);
             localStorage.setItem('goods-photos', JSON.stringify(goodsPhotos));
         }
         bar.css("width", "100%").text("100%");
@@ -255,6 +256,7 @@ function deleteGoodsPhoto(fileName) {
         if (data && data.removed) {
             $(`#${fileName}`).closest('.preview-item').remove();
             deleteGoodsPhotoFromLocalStorage(fileName);
+            $('#upload-goods-img').removeClass('uk-hidden');
         }
     }).fail(function(err) {
         console.log(err);
@@ -301,6 +303,5 @@ $('body').on('click', '#shop-setting button', function(e) {
     $('#actual-goods-image-upload').click();
 }).on('click', '#goods-image-preview .delete-photo', function(e) {
     const id = $(this).attr('id');
-    console.log(id);
     deleteGoodsPhoto(id);
 });
