@@ -281,6 +281,10 @@ function deleteGoodsPhotoFromLocalStorage(fileName) {
     }
 };
 
+function clearLocalGoodsPhotos() {
+    localStorage.setItem('goods-photos', '');
+};
+
 /**
  * 添加商品
  */
@@ -309,7 +313,25 @@ function addGoods() {
             photos: photos,
             shop: shop
         }).done(function(res) {
-            console.log(res);
+            if (res && res.id) {
+                clearLocalGoodsPhotos();
+                UIkit.notify({
+                    message: '<i class=\'uk-icon-check\'></i> 恭喜您，商品已经上传到了服务器',
+                    status: 'success',
+                    timeout: 3000,
+                    pos: 'top-center'
+                });
+                setTimeout(function() {
+                    window.location.reload();
+                }, 3000);
+            } else {
+                UIkit.notify({
+                    message: '<i class=\'uk-icon-times\'></i> 抱歉，商品上传过程中遇到问题，请重试',
+                    status: 'danger',
+                    timeout: 3000,
+                    pos: 'top-center'
+                });
+            }
         }).fail(function(err) {
             console.log(err);
         });
