@@ -169,12 +169,15 @@ block body
                                     label.uk-form-label 商品描述
                                     .uk-form-controls
                                         textarea(name="goods_des")
+                                        .uk-hidden.uk-alert.uk-alert-danger.description-error
                                 .uk-form-row
                                     label.uk-form-label 实物图片
                                         span.uk-text-danger (限三张)
                                     .uk-form-controls
                                         .uk-hidden.uk-alert.uk-alert-danger.photos-error
                                         #goods-image-preview.uk-hidden
+                                .uk-form-row
+                                    .uk-form-controls
                                         input#actual-goods-image-upload.uk-hidden(type="file" name="goods-img")
                                         a#upload-goods-img.uk-thumbnail(href="javascript:;")
                                             img.goods-img(src="/assets/img/fruit_default.jpg" alt="默认图片" data-default="1")

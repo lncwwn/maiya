@@ -52,8 +52,20 @@ module.exports = function(router) {
         const shop = this.request.body.shop;
         const url = API_SETTING('new_goods');
 
-        this.body = yield request.postAsync(url).then(res => {
-            console.log(res);
+        this.body = yield request.postAsync({
+            url: url,
+            form: {
+                name: name,
+                price: price,
+                inventory: inventory,
+                description: description,
+                photos: photos,
+                shop: shop
+            }
+        }).then(res => {
+            if (res && res.body) {
+                return JSON.parse(res.body);
+            }
         });
 
     });

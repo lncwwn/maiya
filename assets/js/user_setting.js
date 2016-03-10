@@ -321,36 +321,43 @@ function addGoods() {
  */
 function validateGoodsParams(params) {
     if (!params.name) {
-        $('#goods-setting .name-error').text('请填写商品名称').removeClass('uk-hidden');
+        $('#goods-setting .name-error').html('<i class="uk-icon-exclamation"></i> 请填写商品名称').removeClass('uk-hidden');
         return;
     } else {
         $('#goods-setting .name-error').addClass('uk-hidden');
     }
-    if (params.price == '' || params.price < 0) {
-        $('#goods-setting .price-error').text('请填写正确的商品价格').removeClass('uk-hidden');
+    if (params.price == '' || params.price < 0 || isNaN(+params.price)) {
+        $('#goods-setting .price-error').html('<i class="uk-icon-exclamation"></i> 请填写正确的商品价格，价格为大于等于0的数字').removeClass('uk-hidden');
         return;
     } else {
         $('#goods-setting .price-error').addClass('uk-hidden');
     }
-    if (params.inventory == '' || params.price < 0) {
-        $('#goods-setting .inventory-error').text('请填写商品名称').removeClass('uk-hidden');
+    if (params.inventory == '' || params.inventory < 0 || isNaN(+params.inventory)) {
+        $('#goods-setting .inventory-error').html('<i class="uk-icon-exclamation"></i> 请填写正确的商品库存，库存量为大于等于0的整数').removeClass('uk-hidden');
         return;
     } else {
         $('#goods-setting .inventory-error').addClass('uk-hidden');
     }
+    if (!params.description) {
+        $('#goods-setting .description-error').html('<i class="uk-icon-exclamation"></i> 请填写商品描述，做用心负责的卖家').removeClass('uk-hidden');
+        return;
+    } else {
+        $('#goods-setting .description-error').addClass('uk-hidden');
+    }
     if (!params.photos) {
-        $('#goods-setting .photos-error').text('请务必上传三张商品照片').removeClass('uk-hidden');
+        $('#goods-setting .photos-error').html('<i class="uk-icon-exclamation"></i> 请务必上传三张商品照片').removeClass('uk-hidden');
         return;
     } else {
         const photos = JSON.parse(params.photos);
         if (photos.length < 3) {
             const missing = 3 - photos.length;
-            $('#goods-setting .photos-error').text(`请务必上传三张商品照片，您还需要上传${missing}张`).removeClass('uk-hidden');
+            $('#goods-setting .photos-error').html(`<i class="uk-icon-exclamation"></i> 请务必上传三张商品照片，您还需要上传${missing}张`).removeClass('uk-hidden');
             return;
         } else {
             $('#goods-setting .photos-error').addClass('uk-hidden');
         }
     }
+    return true;
 };
 
 // on document ready
@@ -361,6 +368,8 @@ $(function() {
     fetchColumn(userId);
     loadGoodsPhotosFromLocalStorage();
 });
+
+let timer1, timer2, timer3, timer4, timer5;
 
 $('body').on('click', '#shop-setting button', function(e) {
     e.preventDefault();
@@ -387,4 +396,44 @@ $('body').on('click', '#shop-setting button', function(e) {
 }).on('click', '#add-goods-button', function(e) {
     e.preventDefault();
     addGoods();
+}).on('input', '#goods-setting input[name="goods_name"]', function(e) {
+    clearTimeout(timer1);
+    const value = $(this).val();
+    timer1 = setTimeout(function() {
+        if (value) {
+            $('#goods-setting .name-error').addClass('uk-hidden');
+        } else {
+            $('#goods-setting .name-error').html('<i class="uk-icon-exclamation"></i> 请填写商品名称').removeClass('uk-hidden');
+        }
+    }, 500);
+}).on('input', '#goods-setting input[name="goods_price"]', function(e) {
+    clearTimeout(timer2);
+    const value = $(this).val();
+    timer2 = setTimeout(function() {
+        if (value && !isNaN(+value) && value >= 0) {
+            $('#goods-setting .price-error').addClass('uk-hidden');
+        } else {
+            $('#goods-setting .price-error').html('<i class="uk-icon-exclamation"></i> 请填写正确的商品价格，价格为大于等于0的数字').removeClass('uk-hidden');
+        }
+    }, 500);
+}).on('input', '#goods-setting input[name="goods_inventory"]', function(e) {
+    clearTimeout(timer3);
+    const value = $(this).val();
+    timer3 = setTimeout(function() {
+        if (value && !isNaN(+value) && value >= 0) {
+            $('#goods-setting .inventory-error').addClass('uk-hidden');
+        } else {
+            $('#goods-setting .inventory-error').html('<i class="uk-icon-exclamation"></i> 请填写正确的商品库存，库存量为大于等于0的整数').removeClass('uk-hidden');
+        }
+    }, 500);
+}).on('input', '#goods-setting textarea[name="goods_des"]', function(e) {
+    clearTimeout(timer4);
+    const value = $(this).val();
+    timer4 = setTimeout(function() {
+        if (value) {
+            $('#goods-setting .description-error').addClass('uk-hidden');
+        } else {
+            $('#goods-setting .description-error').html('<i class="uk-icon-exclamation"></i> 请填写商品描述，做用心负责的卖家').removeClass('uk-hidden');
+        }
+    }, 500);
 });
