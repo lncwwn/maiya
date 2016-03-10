@@ -29,10 +29,11 @@ module.exports = function(router) {
 
     });
 
-    // list user's shops
+    /* list user's shops
     router.get('', function *() {
         //
     });
+    */
 
     // 开通店铺
     router.post('/shop/active', function *() {
